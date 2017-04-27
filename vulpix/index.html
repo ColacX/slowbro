@@ -18,13 +18,15 @@
 		$(document).ready(function(){
 			updateTime();
 			$("#roomName").text("1.1 Innovation");
-			$('#carousel').carousel3d();
-			
+			$("#carousel").carousel3d();
+			$("#debugString").text("w:" + window.innerWidth + " h:" + window.innerHeight);
 			setInterval(updateTime, 1000 * 60);
 		});
 	</script>
 </head>
 <body>
+
+<h1 style="text-align:center" id="debugString"></h1>
 
 <div class="outerContainer">
 	<div class="innerContainer">

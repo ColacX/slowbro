@@ -145,21 +145,19 @@ ul{
 	width:200px;
 	height:30px;
 	background-color:green;
-	border-style:none;
 }
 
 .cancelBookingButton{
 	width:100%;
 	height:30px;
 	background-color:green;
-	border-style:none;
 }
 
 .extendBookingButton{
 	width:100%;
 	height:30px;
 	background-color:red;
-	border-style:none;
+	/* border-style:none; */
 }
 
 .bookingList{
