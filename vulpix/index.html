@@ -7,66 +7,80 @@
 	<script src="jquery-3.2.1.min.js"></script>
 	<script src="3dcarousel.js"></script>
 	<script type="text/javascript">
+		var locale = "SV-sv";
+	
+		function updateTime(){
+			var d = new Date();
+			$("#currentTime").text(d.toLocaleTimeString(locale, {hour: "2-digit", minute: "2-digit"}));
+			$("#currentDate").text(d.toLocaleDateString(locale, {month: "long", day:"numeric"}));
+		};
+	
 		$(document).ready(function(){
+			updateTime();
+			$("#roomName").text("1.1 Innovation");
 			$('#carousel').carousel3d();
 			
-			var _gaq = _gaq || [];
-  _gaq.push(['_setAccount', 'UA-36251023-1']);
-  _gaq.push(['_setDomainName', 'jqueryscript.net']);
-  _gaq.push(['_trackPageview']);
-
-  (function() {
-    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
-    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
-    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
-  })();
+			setInterval(updateTime, 1000 * 60);
 		});
 	</script>
 </head>
 <body>
 
-<div id="info">
-	<span id="currentTime">12:00</span>
-	<span id="currentDate">24 september</span>
-	<span id="roomName">1.1 Innovation</span>
-	<img src="" alt="logo"></img>
-	<button id="addBookingButton">Add Booking</button>
+<div class="outerContainer">
+	<div class="innerContainer">
+		<span id="currentTime">currentTime</span>
+		<span id="currentDate">currentDate</span>
+	</div>
+	<div class="innerContainer">
+		<span id="roomName">roomName</span>
+		<button id="addBookingButton" class="addBookingButton">Add Booking</button>
+	</div>
+	<!-- <img src="" alt="logo"></img> -->
 </div>
 
 <hr/>
 
 <div class="bookingList">
-
-	<div class="bookingItem">
-		<span>Name</span>
-		<span>TimeStart</span><span>TimeEnd</span>
-		<button>Extend Booking</button>
-		<button>Cancel Booking</button>
+	<div id="perspective">
+		<div id="carousel">
+			<figure class="bookingItem">
+				<span>Name</span>
+				<span>TimeStart</span><span>TimeEnd</span>
+				<button class="cancelBookingButton">Cancel Booking</button>
+				<button class="extendBookingButton">Extend Booking</button>
+			</figure>
+			<figure class="bookingItem">
+				<span>Name</span>
+				<span>TimeStart</span><span>TimeEnd</span>
+				<button class="cancelBookingButton">Cancel Booking</button>
+				<button class="extendBookingButton">Extend Booking</button>
+			</figure>
+			<figure class="bookingItem">
+				<span>Name</span>
+				<span>TimeStart</span><span>TimeEnd</span>
+				<button class="cancelBookingButton">Cancel Booking</button>
+				<button class="extendBookingButton">Extend Booking</button>
+			</figure>
+			<figure class="bookingItem">
+				<span>Name</span>
+				<span>TimeStart</span><span>TimeEnd</span>
+				<button class="cancelBookingButton">Cancel Booking</button>
+				<button class="extendBookingButton">Extend Booking</button>
+			</figure>
+			<figure class="bookingItem">
+				<span>Name</span>
+				<span>TimeStart</span><span>TimeEnd</span>
+				<button class="cancelBookingButton">Cancel Booking</button>
+				<button class="extendBookingButton">Extend Booking</button>
+			</figure>
+			<figure class="bookingItem">
+				<span>Name</span>
+				<span>TimeStart</span><span>TimeEnd</span>
+				<button class="cancelBookingButton">Cancel Booking</button>
+				<button class="extendBookingButton">Extend Booking</button>
+			</figure>
+		</div>
 	</div>
-	<div class="bookingItem">
-		<button>cancel</button>
-	</div>
-</div>
-
-<hr/>
-
-<h1 align="center" style="margin-top:150px;">jQuery 3D Carousel Demo</h1>
-<div id="container">
-  <div id="perspective">
-    <div id="carousel">
-      <figure>1</figure>
-      <figure>2</figure>
-      <figure>3</figure>
-      <figure>4</figure>
-      <figure>5</figure>
-      <figure>6</figure>
-      <figure>7</figure>
-      <figure>8</figure>
-      <figure>9</figure>
-      <figure>10</figure>
-    </div>
-  </div>
-
 </div>
 
 </body>

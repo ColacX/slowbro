@@ -23,18 +23,6 @@ body{
 	background: #eee;
 }
 
-#container{
-	background: #fff;
-	width: 800px;
-	padding: 30px;
-	min-height: 400px;
-	margin: 0 auto;
-	margin-top: 40px;
-	margin-bottom: 40px;
-	box-shadow:  1px 1px 3px 0px rgba(0, 0, 0, 0.3);
-	overflow: auto;
-}
-
 p{
 	color: #444;
 	margin: 15px 0;
@@ -151,4 +139,67 @@ ul{
   -moz-transition: opacity 1s, -moz-transform 1s;
   -o-transition: opacity 1s, -o-transform 1s;
   transition: opacity 1s, transform 1s;
+}
+
+.addBookingButton{
+	width:200px;
+	height:30px;
+	background-color:green;
+	border-style:none;
+}
+
+.cancelBookingButton{
+	width:100%;
+	height:30px;
+	background-color:green;
+	border-style:none;
+}
+
+.extendBookingButton{
+	width:100%;
+	height:30px;
+	background-color:red;
+	border-style:none;
+}
+
+.bookingList{
+	width: 100%;
+	text-align:center;
+	padding: 20px;
+}
+
+.bookingItem{
+	background-color:grey;
+	width:300px;
+	height:80px;
+	padding:5px;
+	display:inline-block;
+}
+
+#currentTime{
+	font-size:100px;
+	font:bold;
+	display:block;
+}
+
+#currentDate{
+	font-size:25px;
+	display:block;
+}
+
+#roomName{
+	font-size:25px;
+	font:bold;
+	display:block;
+}
+
+.outerContainer{
+	text-align:center;
+}
+
+.innerContainer{
+	text-align:center;
+	display:inline-block;
+	padding: 10px;
+	width:250px;
 }
