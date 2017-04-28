@@ -113,12 +113,12 @@
 				}
 			]);
 			
-			fetchToken.then(fetchData);
+			fetchToken().then(fetchData);
 			
 			//$("#debugString").text("w:" + window.innerWidth + " h:" + window.innerHeight);
 			setInterval(function(){
 				updateTime();
-				fetchData.fail(fetchToken).then(fetchData);
+				fetchData().fail(fetchToken).then(fetchData);
 			}, 1000 * 60);
 		});
 	</script>
