@@ -43,10 +43,11 @@
 				method: "POST",
 				url: "http://slowbro.azurewebsites.net/Web/Services/index.php/Authentication/Authenticate",
 				dataType: "json",
-				data: {
+				contentType: "application/json; charset=utf-8",
+				data: JSON.stringify({
 					username:"admin",
 					password:"password"
-				}
+				})
 			}).done(function(response) {
 				console.log(response);
 			});
