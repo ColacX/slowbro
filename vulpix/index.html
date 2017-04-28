@@ -293,8 +293,7 @@
 			setInterval(function(){
 				updateTime();
 				
-				fetchResourceData
-				.then(fetchReservationsData)
+				fetchReservationsData()
 				.fail(fetchToken);
 			}, 1000 * 60);
 		});
