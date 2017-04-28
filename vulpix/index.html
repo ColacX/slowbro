@@ -11,7 +11,7 @@
 		var locale = "SV-sv";
 		var sessionToken = null;
 		var sessionUserId = null;
-		var resourceId = 1;
+		var resourceId = "1";
 		var username = "admin";
 		var password = "password";
 	
@@ -60,7 +60,20 @@
 			});
 		}
 		
-		function fetchData(){
+		function fetchResourceData(){
+			return $.ajax({
+				method: "GET",
+				url: "http://slowbro.azurewebsites.net/Web/Services/index.php/Resources/" + resourceId,
+				headers: {
+					"X-Booked-SessionToken": sessionToken,
+					"X-Booked-UserId": sessionUserId
+				}
+			}).done(function(r) {
+				$("#roomName").text(r.name);
+			});
+		}
+		
+		function fetchReservationsData(){
 			return $.ajax({
 				method: "GET",
 				url: "http://slowbro.azurewebsites.net/Web/Services/index.php/Reservations",
@@ -78,7 +91,6 @@
 		}
 	
 		$(document).ready(function(){
-			$("#roomName").text("1.1 Innovation");
 			updateTime();
 			updateBookingView([
 				{
@@ -113,12 +125,16 @@
 				}
 			]);
 			
-			fetchToken().then(fetchData);
+			fetchToken()
+			.then(fetchResourceData)
+			.then(fetchReservationsData);
 			
 			//$("#debugString").text("w:" + window.innerWidth + " h:" + window.innerHeight);
 			setInterval(function(){
 				updateTime();
-				fetchData().fail(fetchToken).then(fetchData);
+				fetchReservationsData()
+				.fail(fetchToken)
+				.then(fetchReservationsData);
 			}, 1000 * 60);
 		});
 	</script>
