@@ -11,7 +11,7 @@
 		var locale = "SV-sv";
 		var sessionToken = null;
 		var sessionUserId = null;
-		var resourceId = "1";
+		var resourceId = null;
 		var username = "admin";
 		var password = "password";
 	
@@ -89,8 +89,21 @@
 				console.log(r);
 			});
 		}
+		
+		function getReservationId(){
+			var array = window.location.search.substring(1).split("&");
+			var argMap = {};
+			
+			for(var i=0; i<array.length; i++){
+				var arg = array[i].split("=");
+				argMap[arg[0]] = arg[1];
+			}
+			
+			resourceId = argMap["resourceId"];
+		}
 	
 		$(document).ready(function(){
+			getReservationId();
 			updateTime();
 			updateBookingView([
 				{
