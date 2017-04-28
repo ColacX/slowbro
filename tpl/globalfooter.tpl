@@ -20,7 +20,7 @@ along with Booked Scheduler.  If not, see <http://www.gnu.org/licenses/>.
 	</div><!-- close main-->
 
 	<footer class="footer navbar">
-		&copy; 2017 <a href="http://www.twinkletoessoftware.com">Twinkle Toes Software</a> <br/><a href="http://www.bookedscheduler.com">Booked Scheduler v{$Version}</a>
+		&copy; 2017 <a href="http://symbiosweden.eu/">Symbil Sweden</a> <br/>
 	</footer>
 
 	<script type="text/javascript">
