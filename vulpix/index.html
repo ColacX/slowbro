@@ -210,12 +210,27 @@
 				l.push("	<p>" + item.title + "</p>");
 				l.push("	<span>Start: " + s.toLocaleTimeString(locale, {hour: "2-digit", minute: "2-digit"}) + "</span>");
 				l.push("	<span>End: " + e.toLocaleTimeString(locale, {hour: "2-digit", minute: "2-digit"}) + "</span>");
-				l.push("	<button class='cancelBookingButton'>Cancel Booking</button>");
-				l.push("	<button class='extendBookingButton'>Extend Booking</button>");
+				l.push("	<div>");
+				l.push("		<button class='cancelBookingButton'>Cancel Booking</button>");
+				l.push("		<button class='extendBookingButton'>Extend Booking</button>");
+				l.push("	</div>");
 				l.push("</div>");
 			}
 			
 			$("#bookingList").html(l.join("\n"));
+			
+			if(bookingItems.length <= 0){
+				return;
+			}
+			
+			var d = 360/bookingItems.length;
+			
+			for(var i=0; i<bookingItems.length; i++){
+				var key = "#bookingList div:nth-child(" + (i+1) + ")";
+				var value = "transform: rotateY(" + (d*i) + "deg" + ")";
+				console.log(key + ":" + value);
+				$("#bookingList").css(key, value);
+			}
 		}
 		
 		function fetchToken(){
