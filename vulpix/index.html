@@ -10,6 +10,10 @@
 	<script type="text/javascript">
 		var locale = "SV-sv";
 		var sessionToken = null;
+		var sessionUserId = null;
+		var resourceId = 1;
+		var username = "admin";
+		var password = "password";
 	
 		function updateTime(){
 			var d = new Date();
@@ -38,23 +42,39 @@
 			$("#carousel").carousel3d();
 		}
 		
-		function update(){
-			$.ajax({
+		function fetchToken(){
+			return $.ajax({
 				method: "POST",
 				url: "http://slowbro.azurewebsites.net/Web/Services/index.php/Authentication/Authenticate",
 				dataType: "json",
 				contentType: "application/json; charset=utf-8",
 				data: JSON.stringify({
-					username:"admin",
-					password:"password"
+					username: username,
+					password: password
 				})
-			}).done(function(response) {
-				console.log(response);
+			}).done(function(r) {
+				if(r.isAuthenticated){
+					sessionToken = r.sessionToken;
+					sessionUserId = r.userId;
+				}
 			});
 		}
 		
 		function fetchData(){
-			
+			return $.ajax({
+				method: "GET",
+				url: "http://slowbro.azurewebsites.net/Web/Services/index.php/Reservations",
+				dataType: "json",
+				data: {
+					resourceId: resourceId
+				},
+				headers: {
+					"X-Booked-SessionToken": sessionToken,
+					"X-Booked-UserId": sessionUserId
+				}
+			}).done(function(r) {
+				console.log(r);
+			});
 		}
 	
 		$(document).ready(function(){
@@ -93,8 +113,13 @@
 				}
 			]);
 			
+			fetchToken.then(fetchData);
+			
 			//$("#debugString").text("w:" + window.innerWidth + " h:" + window.innerHeight);
-			setInterval(updateTime, 1000 * 60);
+			setInterval(function(){
+				updateTime();
+				fetchData.fail(fetchToken).then(fetchData);
+			}, 1000 * 60);
 		});
 	</script>
 </head>
