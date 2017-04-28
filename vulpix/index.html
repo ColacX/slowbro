@@ -208,8 +208,8 @@
 				var e = new Date(item.endDate);
 				l.push("<div class='bookingItem'>");
 				l.push("	<p>" + item.title + "</p>");
-				l.push("	<span>Start: " + s.toLocaleTimeString(locale, {hour: "2-digit", minute: "2-digit"}) + "</span>");
-				l.push("	<span>End: " + e.toLocaleTimeString(locale, {hour: "2-digit", minute: "2-digit"}) + "</span>");
+				l.push("	<p>Start: " + s.toLocaleString(locale, {year: "numeric", month: "numeric", day:"numeric", hour: "2-digit", minute: "2-digit"}) + "</p>");
+				l.push("	<p>End: " + e.toLocaleString(locale, {year: "numeric", month: "numeric", day:"numeric",  hour: "2-digit", minute: "2-digit"}) + "</p>");
 				l.push("	<div>");
 				l.push("		<button class='cancelBookingButton'>Cancel Booking</button>");
 				l.push("		<button class='extendBookingButton'>Extend Booking</button>");
