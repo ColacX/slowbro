@@ -6,7 +6,6 @@
 	<title>vulpix</title>
 	<link rel="stylesheet" href="index.css">
 	<script src="jquery-3.2.1.min.js"></script>
-	<script src="3dcarousel.js"></script>
 	<script type="text/javascript">
 		var locale = "SV-sv";
 		var sessionToken = null;
@@ -14,6 +13,185 @@
 		var resourceId = null;
 		var username = "admin";
 		var password = "password";
+		var mockData = [
+      {
+         "referenceNumber":"590323bd7569e964021500",
+         "startDate":"2017-04-28T13:00:00+0000",
+         "endDate":"2017-04-30T13:30:00+0000",
+         "firstName":"Admin",
+         "lastName":"Admin",
+         "resourceName":"Innovation",
+         "title":"Booking Test",
+         "description":"Slowbro dude!",
+         "requiresApproval":false,
+         "isRecurring":false,
+         "scheduleId":"1",
+         "userId":"11",
+         "resourceId":"1",
+         "duration":"2 days 30 minutes",
+         "bufferTime":"",
+         "bufferedStartDate":"2017-04-28T13:00:00+0000",
+         "bufferedEndDate":"2017-04-30T13:30:00+0000",
+         "participants":[
+
+         ],
+         "invitees":[
+
+         ],
+         "participatingGuests":[
+
+         ],
+         "invitedGuests":null,
+         "startReminder":null,
+         "endReminder":null,
+         "color":"",
+         "textColor":"",
+         "checkInDate":"",
+         "checkOutDate":"",
+         "originalEndDate":"",
+         "isCheckInEnabled":false,
+         "autoReleaseMinutes":null,
+         "resourceStatusId":"1",
+         "creditsConsumed":null,
+         "links":[
+            {
+               "href":"http:\/\/slowbro.azurewebsites.net\/Web\/Services\/index.php\/Resources\/1",
+               "title":"get_resource"
+            },
+            {
+               "href":"http:\/\/slowbro.azurewebsites.net\/Web\/Services\/index.php\/Reservations\/590323bd7569e964021500",
+               "title":"get_reservation"
+            },
+            {
+               "href":"http:\/\/slowbro.azurewebsites.net\/Web\/Services\/index.php\/Users\/11",
+               "title":"get_user"
+            },
+            {
+               "href":"http:\/\/slowbro.azurewebsites.net\/Web\/Services\/index.php\/Schedules\/1",
+               "title":"get_schedule"
+            }
+         ],
+         "message":null
+      },
+      {
+         "referenceNumber":"59034220435a5037285545",
+         "startDate":"2017-04-28T13:30:00+0000",
+         "endDate":"2017-04-28T14:00:00+0000",
+         "firstName":"Admin",
+         "lastName":"Admin",
+         "resourceName":"Darkness",
+         "title":"test",
+         "description":"test",
+         "requiresApproval":false,
+         "isRecurring":false,
+         "scheduleId":"1",
+         "userId":"11",
+         "resourceId":"11",
+         "duration":"30 minutes",
+         "bufferTime":"",
+         "bufferedStartDate":"2017-04-28T13:30:00+0000",
+         "bufferedEndDate":"2017-04-28T14:00:00+0000",
+         "participants":[
+
+         ],
+         "invitees":[
+
+         ],
+         "participatingGuests":[
+
+         ],
+         "invitedGuests":null,
+         "startReminder":null,
+         "endReminder":null,
+         "color":"#2b2b2b",
+         "textColor":"#FFFFFF",
+         "checkInDate":"",
+         "checkOutDate":"",
+         "originalEndDate":"",
+         "isCheckInEnabled":false,
+         "autoReleaseMinutes":null,
+         "resourceStatusId":"1",
+         "creditsConsumed":null,
+         "links":[
+            {
+               "href":"http:\/\/slowbro.azurewebsites.net\/Web\/Services\/index.php\/Resources\/11",
+               "title":"get_resource"
+            },
+            {
+               "href":"http:\/\/slowbro.azurewebsites.net\/Web\/Services\/index.php\/Reservations\/59034220435a5037285545",
+               "title":"get_reservation"
+            },
+            {
+               "href":"http:\/\/slowbro.azurewebsites.net\/Web\/Services\/index.php\/Users\/11",
+               "title":"get_user"
+            },
+            {
+               "href":"http:\/\/slowbro.azurewebsites.net\/Web\/Services\/index.php\/Schedules\/1",
+               "title":"get_schedule"
+            }
+         ],
+         "message":null
+      },
+      {
+         "referenceNumber":"590342804cb75079141131",
+         "startDate":"2017-04-30T13:30:00+0000",
+         "endDate":"2017-05-01T05:00:00+0000",
+         "firstName":"Admin",
+         "lastName":"Admin",
+         "resourceName":"Innovation",
+         "title":"Wish I'd taken Hobo",
+         "description":"",
+         "requiresApproval":false,
+         "isRecurring":false,
+         "scheduleId":"1",
+         "userId":"11",
+         "resourceId":"1",
+         "duration":"15 hours 30 minutes",
+         "bufferTime":"",
+         "bufferedStartDate":"2017-04-30T13:30:00+0000",
+         "bufferedEndDate":"2017-05-01T05:00:00+0000",
+         "participants":[
+
+         ],
+         "invitees":[
+
+         ],
+         "participatingGuests":[
+
+         ],
+         "invitedGuests":null,
+         "startReminder":null,
+         "endReminder":null,
+         "color":"",
+         "textColor":"",
+         "checkInDate":"",
+         "checkOutDate":"",
+         "originalEndDate":"",
+         "isCheckInEnabled":false,
+         "autoReleaseMinutes":null,
+         "resourceStatusId":"1",
+         "creditsConsumed":null,
+         "links":[
+            {
+               "href":"http:\/\/slowbro.azurewebsites.net\/Web\/Services\/index.php\/Resources\/1",
+               "title":"get_resource"
+            },
+            {
+               "href":"http:\/\/slowbro.azurewebsites.net\/Web\/Services\/index.php\/Reservations\/590342804cb75079141131",
+               "title":"get_reservation"
+            },
+            {
+               "href":"http:\/\/slowbro.azurewebsites.net\/Web\/Services\/index.php\/Users\/11",
+               "title":"get_user"
+            },
+            {
+               "href":"http:\/\/slowbro.azurewebsites.net\/Web\/Services\/index.php\/Schedules\/1",
+               "title":"get_schedule"
+            }
+         ],
+         "message":null
+      }
+   ];
 	
 		function updateTime(){
 			var d = new Date();
@@ -24,43 +202,20 @@
 		function updateBookingView(bookingItems){
 			var l = [];
 			
-			l.push("<div>");
-			
 			for(var i=0; i<bookingItems.length; i++){
 				var item = bookingItems[i];
 				var s = new Date(item.startDate);
 				var e = new Date(item.endDate);
 				l.push("<div class='bookingItem'>");
-				l.push("	<span>" + item.title + "</span>");
-				l.push("	<span>Start:</span><span>" + s + "</span>");
-				l.push("	<span>End:</span><span>" + e + "</span>");
+				l.push("	<p>" + item.title + "</p>");
+				l.push("	<span>Start: " + s.toLocaleTimeString(locale, {hour: "2-digit", minute: "2-digit"}) + "</span>");
+				l.push("	<span>End: " + e.toLocaleTimeString(locale, {hour: "2-digit", minute: "2-digit"}) + "</span>");
 				l.push("	<button class='cancelBookingButton'>Cancel Booking</button>");
 				l.push("	<button class='extendBookingButton'>Extend Booking</button>");
 				l.push("</div>");
 			}
 			
-			l.push("</div>");
-			
-			
-			l.push("<div id='perspective'>");
-			l.push("	<div id='carousel'>");
-			
-			for(var i=0; i<bookingItems.length; i++){
-				l.push("<figure>");
-				l.push("	<span>Name</span>");
-				l.push("	<span>TimeStart</span><span>TimeEnd</span>");
-				l.push("	<span>TimeStart</span><span>TimeEnd</span>");
-				l.push("	<button class='cancelBookingButton'>Cancel Booking</button>");
-				l.push("	<button class='extendBookingButton'>Extend Booking</button>");
-				l.push("</figure>");
-			}
-			
-			l.push("	</div>");
-			l.push("</div>");
-			
-			
 			$("#bookingList").html(l.join("\n"));
-			$("#carousel").carousel3d();
 		}
 		
 		function fetchToken(){
@@ -128,38 +283,7 @@
 		$(document).ready(function(){
 			getReservationId();
 			updateTime();
-			updateBookingView([
-				{
-					id: 1,
-					name: "Samsung",
-					start: "2017-04:28T08:00",
-					end: "2017-04:28T11:00"
-				},
-				{
-					id: 2,
-					name: "Epicenter",
-					start: "2017-04:28T12:00",
-					end: "2017-04:28T13:00"
-				},
-				{
-					id: 3,
-					name: "Epicenter",
-					start: "2017-04:28T12:00",
-					end: "2017-04:28T13:00"
-				},
-				{
-					id: 4,
-					name: "Epicenter",
-					start: "2017-04:28T12:00",
-					end: "2017-04:28T13:00"
-				},
-				{
-					id: 5,
-					name: "Epicenter",
-					start: "2017-04:28T12:00",
-					end: "2017-04:28T13:00"
-				}
-			]);
+			updateBookingView(mockData);
 			
 			fetchToken()
 			.then(fetchResourceData)
