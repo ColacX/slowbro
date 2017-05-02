@@ -34,7 +34,7 @@
 	text-align: center;
 	perspective: 500px;
 	white-space: nowrap;
-	overflow-x: scroll;
+	overflow-x: auto;
 }
 
 .bookingItem{
