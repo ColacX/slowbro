@@ -108,7 +108,7 @@
  $conf['settings']['database']['type'] = 'mysql';
  $conf['settings']['database']['user'] = 'root';        // database user with permission to the booked database
  $conf['settings']['database']['password'] = 'xJylY10OJXbb';
- $conf['settings']['database']['hostspec'] = '127.0.0.1';        // ip, dns or named pipe
+ $conf['settings']['database']['hostspec'] = '104.46.33.133';        // ip, dns or named pipe
  $conf['settings']['database']['name'] = 'slowbro';
  /**
   * Mail server configuration
