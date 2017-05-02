@@ -107,7 +107,7 @@
   */
  $conf['settings']['database']['type'] = 'mysql';
  $conf['settings']['database']['user'] = 'be60bd98781dca';        // database user with permission to the booked database
- $conf['settings']['database']['password'] = 'e95dee0b';
+ $conf['settings']['database']['password'] = '0cfdab32f62f323';
  $conf['settings']['database']['hostspec'] = 'eu-cdbr-azure-west-d.cloudapp.net';        // ip, dns or named pipe
  $conf['settings']['database']['name'] = 'slowbro';
  /**
