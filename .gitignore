@@ -1,1 +1,2 @@
-/config/config.php
+/config/config.live.php
+/config/config.local.php
