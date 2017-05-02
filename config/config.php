@@ -142,7 +142,7 @@
  +/**
  + * API
  + */
- +$conf['settings']['api']['enabled'] = 'false';
+ +$conf['settings']['api']['enabled'] = 'true';
  +/**
  + * ReCaptcha
  + */
