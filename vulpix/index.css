@@ -15,16 +15,18 @@
 }
 
 .cancelBookingButton{
-	width:100%;
+	width:200px;
 	height:30px;
 	background-color:green;
+	margin-top: 100px;
 }
 
 .extendBookingButton{
-	width:100%;
+	width:200px;
 	height:30px;
 	background-color:red;
 	display:none;
+	margin-top: 100px;
 }
 
 #bookingList{
@@ -32,15 +34,14 @@
 	text-align: center;
 	perspective: 500px;
 	white-space: nowrap;
-	overflow: scroll;
+	overflow-x: scroll;
 }
 
 .bookingItem{
 	background-color:grey;
-	width:300px;
-	height:200px;
-	padding:5px;
+	padding:10px;
 	display:inline-block;
+	transition: all 1s ease;
 }
 
 #currentTime{
@@ -62,6 +63,60 @@
 
 #imageLogo{
 	width: 20%;
+}
+
+.modalContainer{
+	width: 100vw;
+	height: 100vh;
+	background-color: rgba(0, 0, 0, 0.5);
+	position: absolute;
+	top:0px;
+	left:0px;
+	text-align:center;
+	display: none;
+}
+
+.modalContainer .innerContainer{
+	background-color:white;
+	display: inline-block;
+	padding: 20px;
+}
+
+.textInput{
+	width:300px;
+	height:25px;
+	padding:20px;
+	border-style:none;
+}
+
+.textInput:focus{
+	border-style:none;
+}
+
+.cancelButton{
+	background-color:red;
+	color:white;
+	margin:10px;
+	width:150px;
+	height:25px;
+}
+
+.okButton{
+	background-color:green;
+	color:white;
+	margin:10px;
+	width:150px;
+	height:25px;
+}
+
+.button{
+	color:white;
+	opacity:1;
+	border-style: none;
+}
+
+.button:active{
+	opacity:0.5;
 }
 
 .container1{

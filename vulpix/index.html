@@ -199,6 +199,14 @@
 			$("#currentDate").text(d.toLocaleDateString(locale, {month: "long", day:"numeric"}));
 		};
 		
+		function cancelBooking(bookingId){
+			console.log(bookingId);
+		}
+		
+		function extendBooking(bookingId){
+			console.log(bookingId);
+		}
+		
 		function updateBookingView(bookingItems){
 			var l = [];
 			
@@ -206,30 +214,30 @@
 				var item = bookingItems[i];
 				var s = new Date(item.startDate);
 				var e = new Date(item.endDate);
-				l.push("<div class='bookingItem'>");
+				l.push("<figure class='bookingItem'>");
 				l.push("	<p>" + item.title + "</p>");
-				l.push("	<p>Start: " + s.toLocaleString(locale, {year: "numeric", month: "numeric", day:"numeric", hour: "2-digit", minute: "2-digit"}) + "</p>");
-				l.push("	<p>End: " + e.toLocaleString(locale, {year: "numeric", month: "numeric", day:"numeric",  hour: "2-digit", minute: "2-digit"}) + "</p>");
+				l.push("	<p>" + s.toLocaleString(locale, {year: "numeric", month: "numeric", weekday: "long", day:"numeric", hour: "2-digit", minute: "2-digit"}) + "</p>");
+				l.push("	<p>" + e.toLocaleString(locale, {year: "numeric", month: "numeric", weekday: "long", day:"numeric",  hour: "2-digit", minute: "2-digit"}) + "</p>");
 				l.push("	<div>");
-				l.push("		<button class='cancelBookingButton' onclick='cancelBooking(bookingId)'>Cancel Booking</button>");
-				l.push("		<button class='extendBookingButton'>Extend Booking</button>");
+				l.push("		<button class='button cancelBookingButton' onclick='cancelBooking(\"" + item.referenceNumber + "\")'>Cancel Booking</button>");
+				l.push("		<button class='button extendBookingButton' onclick='extendBooking(\"" + item.referenceNumber + "\")'>Extend Booking</button>");
 				l.push("	</div>");
-				l.push("</div>");
+				l.push("</figure>");
 			}
 			
 			$("#bookingList").html(l.join("\n"));
+			//transformView();
+		}
+		
+		function transformView(){
+			var l = $(".bookingItem");
+			var d = 360/l.length;
 			
-			if(bookingItems.length <= 0){
-				return;
-			}
-			
-			var d = 360/bookingItems.length;
-			
-			for(var i=0; i<bookingItems.length; i++){
-				var key = "#bookingList div:nth-child(" + (i+1) + ")";
-				var value = "transform: rotateY(" + (d*i) + "deg" + ")";
+			for(var i=0; i<l.length; i++){
+				var key = "transform";
+				var value = "rotateY(" + (d*i) + "deg" + ")";
 				console.log(key + ":" + value);
-				$("#bookingList").css(key, value);
+				$(l[i]).css(key, value);
 			}
 		}
 		
@@ -294,6 +302,20 @@
 			
 			resourceId = argMap["resourceId"];
 		}
+				
+		function setHandlers(){
+			$(".addBookingButton").on("click", function(){
+				$("#phonenumberWindow").show();
+			});
+			
+			$("#phonenumberWindow .cancelButton").on("click", function(){
+				$("#phonenumberWindow").hide();
+			});
+			
+			$("#phonenumberWindow .okButton").on("click", function(){
+				
+			});
+		}
 	
 		$(document).ready(function(){
 			getReservationId();
@@ -311,6 +333,8 @@
 				fetchReservationsData()
 				.fail(fetchToken);
 			}, 1000 * 60);
+			
+			setHandlers();
 		});
 	</script>
 </head>
@@ -329,7 +353,7 @@
 	<div class="innerContainer">
 		<img id="imageLogo" src="symbio_logo.svg" alt="logo"/>
 		<span id="roomName">roomName</span>
-		<button id="addBookingButton" class="addBookingButton">Add Booking</button>
+		<button id="addBookingButton" class="button addBookingButton">Add Booking</button>
 	</div>
 </div>
 
@@ -337,6 +361,23 @@
 
 <div class="container3">
 	<div id="bookingList">
+	</div>
+</div>
+
+<div id="phonenumberWindow" class="modalContainer">
+	<div class="innerContainer">
+		<p>Please enter your phonenumber to continue</p>
+		<input type="text" class="textInput" placeholder="0701234567"/>
+		<div>
+			<button class="button cancelButton">CANCEL</button>
+			<button class="button okButton">OK</button>
+		</div>
+	</div>
+</div>
+
+<div id="addBookingWindow" class="modalContainer">
+	<div class="innerContainer">
+		<p>Add Booking</p>
 	</div>
 </div>
 
