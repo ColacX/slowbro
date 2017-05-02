@@ -106,9 +106,9 @@
   * Database configuration
   */
  $conf['settings']['database']['type'] = 'mysql';
- $conf['settings']['database']['user'] = 'be60bd98781dca';        // database user with permission to the booked database
- $conf['settings']['database']['password'] = 'e95dee0b';
- $conf['settings']['database']['hostspec'] = 'eu-cdbr-azure-west-d.cloudapp.net';        // ip, dns or named pipe
+ $conf['settings']['database']['user'] = 'root';        // database user with permission to the booked database
+ $conf['settings']['database']['password'] = 'xJylY10OJXbb';
+ $conf['settings']['database']['hostspec'] = '104.46.33.133';        // ip, dns or named pipe
  $conf['settings']['database']['name'] = 'slowbro';
  /**
   * Mail server configuration
