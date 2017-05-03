@@ -302,19 +302,71 @@
 			
 			resourceId = argMap["resourceId"];
 		}
-				
-		function setHandlers(){
-			$(".addBookingButton").on("click", function(){
-				$("#phonenumberWindow").show();
-			});
+		
+		function phonenumberPrompt(){
+			var d = $.Deferred();
+			$("#phonenumberWindow").show();
+			$("#phonenumberWindow .textInput").focus();
 			
 			$("#phonenumberWindow .cancelButton").on("click", function(){
 				$("#phonenumberWindow").hide();
+				d.resolve();
 			});
 			
 			$("#phonenumberWindow .okButton").on("click", function(){
+				//d.reject();
+				var phonenumber = $("#phonenumberWindow .textInput").val();
 				
+				$("#phonenumberWindow").hide();
+				d.resolve(phonenumber);
 			});
+			
+			return d.promise();
+		}
+		
+		function createReservation(userId){
+			return $.ajax({
+				method: "POST",
+				url: "/Web/Services/index.php/Reservations",
+				dataType: "json",
+				data: {
+					"resourceId": resourceId,
+					"startDateTime": "2017-05-03T08:17:00-0700",
+					"endDateTime": "2017-05-03T08:17:30-0700",
+					"title": "title",
+					"userId": 1,
+					"description": "reservation description",
+					"title": "reservation title",
+					"recurrenceRule":{
+						"type": "none"
+					}
+				},
+				headers: {
+					"X-Booked-SessionToken": sessionToken,
+					"X-Booked-UserId": sessionUserId
+				}
+			}).done(function(r) {
+				console.log(r);
+			});
+		}
+				
+		function setHandlers(){
+			$(".addBookingButton").on("click", function(){
+				phonenumberPrompt()
+				.then(function(phonenumber){
+					if(phonenumber){
+						console.log(phonenumber);
+					}
+					else{
+						console.log("cancel");
+					}
+				})
+				.fail(showError);
+			});
+		}
+		
+		function showError(e){
+			 console.log(e);
 		}
 	
 		$(document).ready(function(){
@@ -326,7 +378,6 @@
 			.then(fetchResourceData)
 			.then(fetchReservationsData);
 			
-			//$("#debugString").text("w:" + window.innerWidth + " h:" + window.innerHeight);
 			setInterval(function(){
 				updateTime();
 				
@@ -339,8 +390,6 @@
 	</script>
 </head>
 <body class="rootContainer">
-
-<h1 style="text-align:center" id="debugString"></h1>
 
 <div class="container1">
 	<div class="innerContainer">
@@ -367,7 +416,7 @@
 <div id="phonenumberWindow" class="modalContainer">
 	<div class="innerContainer">
 		<p>Please enter your phonenumber to continue</p>
-		<input type="text" class="textInput" placeholder="0701234567"/>
+		<input type="tel" class="textInput" placeholder="0701234567"/>
 		<div>
 			<button class="button cancelButton">CANCEL</button>
 			<button class="button okButton">OK</button>
