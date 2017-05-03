@@ -303,17 +303,17 @@
 			resourceId = argMap["resourceId"];
 		}
 		
-		function phonenumberPrompt(){
+		function promptPhonenumber(){
 			var d = $.Deferred();
 			$("#phonenumberWindow").show();
 			$("#phonenumberWindow .textInput").focus();
 			
-			$("#phonenumberWindow .cancelButton").on("click", function(){
+			$("#phonenumberWindow .cancelButton").off("click").on("click", function(){
 				$("#phonenumberWindow").hide();
 				d.resolve();
 			});
 			
-			$("#phonenumberWindow .okButton").on("click", function(){
+			$("#phonenumberWindow .okButton").off("click").on("click", function(){
 				//d.reject();
 				var phonenumber = $("#phonenumberWindow .textInput").val();
 				
@@ -324,35 +324,58 @@
 			return d.promise();
 		}
 		
-		function createReservation(userId){
-			return $.ajax({
-				method: "POST",
-				url: "/Web/Services/index.php/Reservations",
-				dataType: "json",
-				data: {
+		function promptAddBooking(userId){
+			var d = $.Deferred();
+			$("#addBookingWindow").show();
+			$("#addBookingWindow .textInput").focus();
+			
+			$("#addBookingWindow .cancelButton").off("click").on("click", function(){
+				$("#addBookingWindow").hide();
+				d.resolve();
+			});
+			
+			$("#addBookingWindow .okButton").off("click").on("click", function(){
+				userId = "1";
+				
+				postReservation({
 					"resourceId": resourceId,
-					"startDateTime": "2017-05-03T08:17:00-0700",
-					"endDateTime": "2017-05-03T08:17:30-0700",
-					"title": "title",
-					"userId": 1,
+					"startDateTime": $("#addBookingWindow #startDateTime").val(),
+					"endDateTime": $("#addBookingWindow #endDateTime").val(),
+					"title": $("#addBookingWindow #title").val(),
+					"userId": userId,
 					"description": "reservation description",
 					"title": "reservation title",
 					"recurrenceRule":{
 						"type": "none"
 					}
-				},
+				})
+				.then(function(){
+					$("#addBookingWindow").hide();
+					d.resolve();
+				})
+				.fail(d.fail);
+			});
+			
+			return d.promise();
+		}
+		
+		function postReservation(bookingData){
+			return $.ajax({
+				method: "POST",
+				url: "/Web/Services/index.php/Reservations/",
+				dataType: "json",
+				data: JSON.stringify(bookingData),
 				headers: {
 					"X-Booked-SessionToken": sessionToken,
 					"X-Booked-UserId": sessionUserId
 				}
-			}).done(function(r) {
-				console.log(r);
 			});
 		}
 				
 		function setHandlers(){
-			$(".addBookingButton").on("click", function(){
-				phonenumberPrompt()
+			$(".addBookingButton").off("click").on("click", function(){
+				/*
+				promptPhonenumber()
 				.then(function(phonenumber){
 					if(phonenumber){
 						console.log(phonenumber);
@@ -361,6 +384,8 @@
 						console.log("cancel");
 					}
 				})
+				*/
+				promptAddBooking()
 				.fail(showError);
 			});
 		}
@@ -427,6 +452,19 @@
 <div id="addBookingWindow" class="modalContainer">
 	<div class="innerContainer">
 		<p>Add Booking</p>
+		<div>
+			<input id="title" type="text" class="textInput" value="title"/>
+		</div>
+		<div>
+			<input id="startDateTime" type="text" class="textInput" value="2017-05-06 10:00:00"/>
+		</div>
+		<div>
+			<input id="endDateTime" type="text" class="textInput" value="2017-05-06 17:00:00"/>
+		</div>
+		<div>
+			<button class="button cancelButton">CANCEL</button>
+			<button class="button okButton">OK</button>
+		</div>
 	</div>
 </div>
 
