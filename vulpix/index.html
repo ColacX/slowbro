@@ -201,6 +201,9 @@
 		
 		function cancelBooking(bookingId){
 			console.log(bookingId);
+			deleteReservation(bookingId)
+			.done(showPass)
+			.fail(showFail);
 		}
 		
 		function extendBooking(bookingId){
@@ -338,13 +341,12 @@
 				userId = "1";
 				
 				postReservation({
+					"userId": userId,
 					"resourceId": resourceId,
 					"startDateTime": $("#addBookingWindow #startDateTime").val(),
 					"endDateTime": $("#addBookingWindow #endDateTime").val(),
 					"title": $("#addBookingWindow #title").val(),
-					"userId": userId,
 					"description": "reservation description",
-					"title": "reservation title",
 					"recurrenceRule":{
 						"type": "none"
 					}
@@ -371,6 +373,18 @@
 				}
 			});
 		}
+		
+		function deleteReservation(bookingId){
+			return $.ajax({
+				method: "DELETE",
+				url: "/Web/Services/index.php/Reservations/" + bookingId,
+				dataType: "json",
+				headers: {
+					"X-Booked-SessionToken": sessionToken,
+					"X-Booked-UserId": sessionUserId
+				}
+			});
+		}
 				
 		function setHandlers(){
 			$(".addBookingButton").off("click").on("click", function(){
@@ -386,12 +400,16 @@
 				})
 				*/
 				promptAddBooking()
-				.fail(showError);
+				.fail(showFail);
 			});
 		}
 		
-		function showError(e){
-			 console.log(e);
+		function showPass(m){
+			 console.log(m);
+		}
+		
+		function showFail(e){
+			 console.err(e);
 		}
 	
 		$(document).ready(function(){
