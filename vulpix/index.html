@@ -329,10 +329,8 @@
 		}
 		
 		function formatDateTime(dateTimeString){
-			alert(dateTimeString);
 			var d = new Date(dateTimeString);
 			var r = d.toJSON();
-			alert(r);
 			return r;
 		}
 		
@@ -344,7 +342,7 @@
 				$("#addReservationWindow").hide();
 			});
 			
-			$("#addReservationWindow .okButton").off("click").on("click", function(){
+			$("#addReservationWindow .inputForm").off("submit").on("submit", function(){
 				userId = "1";
 				
 				postReservation({
@@ -456,8 +454,6 @@
 			}, 1000 * 60);
 			
 			setHandlers();
-			
-			alert("uid: " + getUniquiIdentifier());
 		});
 	</script>
 </head>
@@ -499,19 +495,21 @@
 <div id="addReservationWindow" class="modalContainer">
 	<div class="innerContainer">
 		<p>Add Reservation</p>
-		<div>
-			<input id="title" type="text" class="textInput" value="title"/>
-		</div>
-		<div>
-			<input id="startDateTime" type="datetime-local" value="2017-05-06 10:00:00"/>
-		</div>
-		<div>
-			<input id="endDateTime" type="datetime-local" value="2017-05-06 17:00:00"/>
-		</div>
-		<div>
-			<button class="button cancelButton">CANCEL</button>
-			<button class="button okButton">OK</button>
-		</div>
+		<form class="inputForm">
+			<div>
+				<input id="title" type="text" class="textInput" placeholder="Booking title" required/>
+			</div>
+			<div>
+				<input id="startDateTime" type="datetime-local" required/>
+			</div>
+			<div>
+				<input id="endDateTime" type="datetime-local" required/>
+			</div>
+			<div>
+				<input type="button" class="button cancelButton" value="CANCEL"/>
+				<input type="submit" class="button okButton" value="OK"/>
+			</div>
+		</form>
 	</div>
 </div>
 
