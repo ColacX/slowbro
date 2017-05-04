@@ -155,6 +155,12 @@
 	top: 30%;
 }
 
+#videoBackground{
+	position:absolute;
+	height:100vh;
+	z-index:-1;
+}
+
 @media screen and (orientation:portrait) {
 .container1{
 	width:100vw;
