@@ -202,7 +202,8 @@
 		function cancelBooking(bookingId){
 			console.log(bookingId);
 			deleteReservation(bookingId)
-			.done(showPass)
+			.then(showPass)
+			.then(fetchReservationsData)
 			.fail(showFail);
 		}
 		
@@ -400,6 +401,8 @@
 				})
 				*/
 				promptAddBooking()
+				.then(showPass)
+				.then(fetchBookingData)
 				.fail(showFail);
 			});
 		}
@@ -409,7 +412,7 @@
 		}
 		
 		function showFail(e){
-			 console.err(e);
+			 console.error(e);
 		}
 	
 		$(document).ready(function(){
@@ -429,10 +432,13 @@
 			}, 1000 * 60);
 			
 			setHandlers();
+			
+			$("#debugData").text(getUniquiIdentifier());
 		});
 	</script>
 </head>
 <body class="rootContainer">
+<div id="debugData"></div>
 
 <div class="container1">
 	<div class="innerContainer">
