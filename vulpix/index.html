@@ -410,11 +410,8 @@
 			});
 		}
 		
-		function showPass(m){
-			console.log(m);
+		function showPass(){
 			$("#passWindow").show();
-			$("#passWindow #passMessage").text(JSON.stringify(m));
-			
 			$("#passWindow .okButton").off("click").on("click", function(){
 				$("#passWindow").hide();
 			});
@@ -527,7 +524,6 @@
 <div id="passWindow" class="modalContainer">
 	<div class="innerContainer">
 		<div style="color:green">Success</div>
-		<div id="passMessage"></div>
 		<button class="button okButton">OK</button>
 	</div>
 </div>
