@@ -14,6 +14,18 @@
 	background-color:green;
 }
 
+.addReservationWindow{
+	
+}
+
+#startDateTime{
+	margin:10px;
+}
+
+#endDateTime{
+	margin:10px;
+}
+
 .cancelReservationButton{
 	width:200px;
 	height:30px;
