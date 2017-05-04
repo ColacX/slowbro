@@ -313,12 +313,12 @@
 			$("#phonenumberWindow").show();
 			$("#phonenumberWindow .textInput").focus();
 			
-			$("#phonenumberWindow .cancelButton").one("click", function(){
+			$("#phonenumberWindow .cancelButton").off("click").on("click", function(){
 				$("#phonenumberWindow").hide();
 				d.resolve();
 			});
 			
-			$("#phonenumberWindow .okButton").one("click", function(){
+			$("#phonenumberWindow .okButton").off("click").on("click", function(){
 				//d.reject();
 				var phonenumber = $("#phonenumberWindow .textInput").val();
 				
@@ -339,16 +339,16 @@
 			$("#addReservationWindow").show();
 			$("#addReservationWindow .textInput").focus();
 			
-			$("#addReservationWindow .cancelButton").one("click", function(){
+			$("#addReservationWindow .cancelButton").off("click").on("click", function(){
 				$("#addReservationWindow").hide();
 			});
 			
-			$("#addReservationWindow input").one("focus", function(){
+			$("#addReservationWindow input").off("click").on("focus", function(){
 				var top = $(this).offset().top;
 				$(window).scrollTop(top);
 			});
 			
-			$("#addReservationWindow .inputForm").one("submit", function(){
+			$("#addReservationWindow .inputForm").off("click").on("submit", function(){
 				showLoading();
 				postReservation({
 					"userId": sessionUserId,
@@ -398,7 +398,7 @@
 		
 		function showPass(){
 			$("#passWindow").show();
-			$("#passWindow .okButton").one("click", function(){
+			$("#passWindow .okButton").off("click").on("click", function(){
 				$("#passWindow").hide();
 			});
 		}
@@ -408,7 +408,7 @@
 			$("#failWindow").show();
 			$("#failWindow #errorMessage").text(JSON.stringify(e));
 			
-			$("#failWindow .okButton").one("click", function(){
+			$("#failWindow .okButton").off("click").on("click", function(){
 				$("#failWindow").hide();
 			});
 		}
