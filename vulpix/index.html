@@ -392,7 +392,7 @@
 				/*
 				promptPhonenumber()
 				.then(function(phonenumber){
-					if(phonenumber){
+					if(phonenumber){	
 						console.log(phonenumber);
 					}
 					else{
@@ -408,21 +408,43 @@
 		}
 		
 		function showPass(m){
-			 console.log(m);
+			console.log(m);
+			$("#passWindow").show();
+			$("#passWindow #passMessage").text(JSON.stringify(e));
+			
+			$("#passWindow .okButton").off("click").on("click", function(){
+				$("#passWindow").hide();
+			});
 		}
 		
 		function showFail(e){
-			 console.error(e);
+			console.error(e);
+			$("#failWindow").show();
+			$("#failWindow #errorMessage").text(JSON.stringify(e));
+			
+			$("#failWindow .okButton").off("click").on("click", function(){
+				$("#failWindow").hide();
+			});
+		}
+		
+		function showLoading(){
+			$("#loadWindow").show();
+		}
+		
+		function hideLoading(){
+			$("#loadWindow").hide();
 		}
 	
 		$(document).ready(function(){
+			showLoading();
 			getReservationId();
 			updateTime();
 			updateBookingView(mockData);
 			
 			fetchToken()
 			.then(fetchResourceData)
-			.then(fetchReservationsData);
+			.then(fetchReservationsData)
+			.always(hideLoading);
 			
 			setInterval(function(){
 				updateTime();
@@ -433,12 +455,11 @@
 			
 			setHandlers();
 			
-			$("#debugData").text(getUniquiIdentifier());
+			alert("uid: " + getUniquiIdentifier());
 		});
 	</script>
 </head>
 <body class="rootContainer">
-<div id="debugData"></div>
 
 <div class="container1">
 	<div class="innerContainer">
@@ -489,6 +510,28 @@
 			<button class="button cancelButton">CANCEL</button>
 			<button class="button okButton">OK</button>
 		</div>
+	</div>
+</div>
+
+<div id="failWindow" class="modalContainer">
+	<div class="innerContainer">
+		<div style="color:red">Error</div>
+		<div id="errorMessage"></div>
+		<button class="button okButton">OK</button>
+	</div>
+</div>
+
+<div id="passWindow" class="modalContainer">
+	<div class="innerContainer">
+		<div style="color:green">Success</div>
+		<div id="passMessage"></div>
+		<button class="button okButton">OK</button>
+	</div>
+</div>
+
+<div id="loadWindow" class="modalContainer">
+	<div class="innerContainer">
+		<div style="color:blue">Loading...</div>
 	</div>
 </div>
 
