@@ -343,7 +343,7 @@
 				$("#addReservationWindow").hide();
 			});
 			
-			$("#addReservationWindow input").off("click").on("click", function(){
+			$("#addReservationWindow input").off("focus").on("focus", function(){
 				var top = $(this).offset().top;
 				$(window).scrollTop(top);
 			});
@@ -500,7 +500,7 @@
 		<p>Add Reservation</p>
 		<form class="inputForm" onsubmit="return false;">
 			<div>
-				<input id="title" type="text" class="textInput" placeholder="Booking title" required/>
+				<input id="title" type="text" class="textInput" placeholder="Booking title" autofocus required/>
 			</div>
 			<div>
 				<input id="startDateTime" type="datetime-local" required/>
