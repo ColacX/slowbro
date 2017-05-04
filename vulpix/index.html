@@ -405,7 +405,7 @@
 		function showPass(m){
 			console.log(m);
 			$("#passWindow").show();
-			$("#passWindow #passMessage").text(JSON.stringify(e));
+			$("#passWindow #passMessage").text(JSON.stringify(m));
 			
 			$("#passWindow .okButton").off("click").on("click", function(){
 				$("#passWindow").hide();
@@ -413,8 +413,9 @@
 		}
 		
 		function showFail(e){
+			console.error(m);
 			$("#failWindow").show();
-			$("#failWindow #errorMessage").text(e);
+			$("#failWindow #errorMessage").text(JSON.stringify(e));
 			
 			$("#failWindow .okButton").off("click").on("click", function(){
 				$("#failWindow").hide();
