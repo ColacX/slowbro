@@ -343,6 +343,11 @@
 				$("#addReservationWindow").hide();
 			});
 			
+			$("#addReservationWindow input").off("click").on("click", function(){
+				var top = $(this).offset().top;
+				$(window).scrollTop(top);
+			});
+			
 			$("#addReservationWindow .inputForm").off("submit").on("submit", function(){
 				showLoading();
 				postReservation({
