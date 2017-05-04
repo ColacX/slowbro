@@ -232,11 +232,12 @@
 			
 			$("#reservationList").html(l.join("\n"));
 			
-			transformOut();
+			setTimeout(transformOut(), 0);
 			setTimeout(transformIn(), 1000);
 		}
 		
 		function transformOut(){
+			console.log("transformOut");
 			var l = $(".reservationItem");
 			
 			for(var i=0; i<l.length; i++){
@@ -247,6 +248,7 @@
 		}
 		
 		function transformIn(){
+			console.log("transformIn");
 			var l = $(".reservationItem");
 		
 			for(var i=0; i<l.length; i++){
