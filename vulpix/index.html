@@ -328,6 +328,14 @@
 			return d.promise();
 		}
 		
+		function formatDateTime(dateTimeString){
+			alert(dateTimeString);
+			var d = new Date(dateTimeString);
+			var r = d.toJSON();
+			alert(r);
+			return r;
+		}
+		
 		function showAddReservation(userId){
 			$("#addReservationWindow").show();
 			$("#addReservationWindow .textInput").focus();
@@ -342,8 +350,8 @@
 				postReservation({
 					"userId": userId,
 					"resourceId": resourceId,
-					"startDateTime": $("#addReservationWindow #startDateTime").val(),
-					"endDateTime": $("#addReservationWindow #endDateTime").val(),
+					"startDateTime": formatDateTime($("#addReservationWindow #startDateTime").val()),
+					"endDateTime": formatDateTime($("#addReservationWindow #endDateTime").val()),
 					"title": $("#addReservationWindow #title").val(),
 					"description": "reservation description",
 					"recurrenceRule":{
@@ -493,9 +501,6 @@
 		<p>Add Reservation</p>
 		<div>
 			<input id="title" type="text" class="textInput" value="title"/>
-		</div>
-		<div>
-			<input type="tel" value="title"/>
 		</div>
 		<div>
 			<input id="startDateTime" type="datetime-local" value="2017-05-06 10:00:00"/>
