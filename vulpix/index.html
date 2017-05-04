@@ -397,7 +397,7 @@
 		}
 				
 		function setHandlers(){
-			$(".addReservationButton").one("click", function(){
+			$(".addReservationButton").off("click").on("click", function(){
 				/*
 				promptPhonenumber()
 				.then(function(phonenumber){
