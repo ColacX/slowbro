@@ -21,7 +21,7 @@
          "firstName":"Admin",
          "lastName":"Admin",
          "resourceName":"Innovation",
-         "title":"Booking Test",
+         "title":"Reservation Test",
          "description":"Slowbro dude!",
          "requiresApproval":false,
          "isRecurring":false,
@@ -199,42 +199,42 @@
 			$("#currentDate").text(d.toLocaleDateString(locale, {month: "long", day:"numeric"}));
 		};
 		
-		function cancelBooking(bookingId){
-			console.log(bookingId);
-			deleteReservation(bookingId)
+		function cancelReservation(reservationId){
+			console.log(reservationId);
+			deleteReservation(reservationId)
 			.then(showPass)
 			.then(fetchReservationsData)
 			.fail(showFail);
 		}
 		
-		function extendBooking(bookingId){
-			console.log(bookingId);
+		function extendReservation(reservationId){
+			console.log(reservationId);
 		}
 		
-		function updateBookingView(bookingItems){
+		function updateReservationView(reservationItems){
 			var l = [];
 			
-			for(var i=0; i<bookingItems.length; i++){
-				var item = bookingItems[i];
+			for(var i=0; i<reservationItems.length; i++){
+				var item = reservationItems[i];
 				var s = new Date(item.startDate);
 				var e = new Date(item.endDate);
-				l.push("<figure class='bookingItem'>");
+				l.push("<figure class='reservationItem'>");
 				l.push("	<p>" + item.title + "</p>");
 				l.push("	<p>" + s.toLocaleString(locale, {year: "numeric", month: "numeric", weekday: "long", day:"numeric", hour: "2-digit", minute: "2-digit"}) + "</p>");
 				l.push("	<p>" + e.toLocaleString(locale, {year: "numeric", month: "numeric", weekday: "long", day:"numeric",  hour: "2-digit", minute: "2-digit"}) + "</p>");
 				l.push("	<div>");
-				l.push("		<button class='button cancelBookingButton' onclick='cancelBooking(\"" + item.referenceNumber + "\")'>Cancel Booking</button>");
-				l.push("		<button class='button extendBookingButton' onclick='extendBooking(\"" + item.referenceNumber + "\")'>Extend Booking</button>");
+				l.push("		<button class='button cancelReservationButton' onclick='cancelReservation(\"" + item.referenceNumber + "\")'>Cancel Reservation</button>");
+				l.push("		<button class='button extendReservationButton' onclick='extendReservation(\"" + item.referenceNumber + "\")'>Extend Reservation</button>");
 				l.push("	</div>");
 				l.push("</figure>");
 			}
 			
-			$("#bookingList").html(l.join("\n"));
+			$("#reservationList").html(l.join("\n"));
 			//transformView();
 		}
 		
 		function transformView(){
-			var l = $(".bookingItem");
+			var l = $(".reservationItem");
 			var d = 360/l.length;
 			
 			for(var i=0; i<l.length; i++){
@@ -291,7 +291,7 @@
 					"X-Booked-UserId": sessionUserId
 				}
 			}).done(function(r) {
-				updateBookingView(r.reservations);
+				updateReservationView(r.reservations);
 			});
 		}
 		
@@ -328,46 +328,44 @@
 			return d.promise();
 		}
 		
-		function promptAddBooking(userId){
-			var d = $.Deferred();
-			$("#addBookingWindow").show();
-			$("#addBookingWindow .textInput").focus();
+		function showAddReservation(userId){
+			$("#addReservationWindow").show();
+			$("#addReservationWindow .textInput").focus();
 			
-			$("#addBookingWindow .cancelButton").off("click").on("click", function(){
-				$("#addBookingWindow").hide();
-				d.resolve();
+			$("#addReservationWindow .cancelButton").off("click").on("click", function(){
+				$("#addReservationWindow").hide();
 			});
 			
-			$("#addBookingWindow .okButton").off("click").on("click", function(){
+			$("#addReservationWindow .okButton").off("click").on("click", function(){
 				userId = "1";
 				
 				postReservation({
 					"userId": userId,
 					"resourceId": resourceId,
-					"startDateTime": $("#addBookingWindow #startDateTime").val(),
-					"endDateTime": $("#addBookingWindow #endDateTime").val(),
-					"title": $("#addBookingWindow #title").val(),
+					"startDateTime": $("#addReservationWindow #startDateTime").val(),
+					"endDateTime": $("#addReservationWindow #endDateTime").val(),
+					"title": $("#addReservationWindow #title").val(),
 					"description": "reservation description",
 					"recurrenceRule":{
 						"type": "none"
 					}
 				})
 				.then(function(){
-					$("#addBookingWindow").hide();
+					$("#addReservationWindow").hide();
 					d.resolve();
 				})
-				.fail(d.fail);
+				.then(showPass)
+				.then(fetchReservationsData)
+				.fail(showFail);
 			});
-			
-			return d.promise();
 		}
 		
-		function postReservation(bookingData){
+		function postReservation(reservationData){
 			return $.ajax({
 				method: "POST",
 				url: "/Web/Services/index.php/Reservations/",
 				dataType: "json",
-				data: JSON.stringify(bookingData),
+				data: JSON.stringify(reservationData),
 				headers: {
 					"X-Booked-SessionToken": sessionToken,
 					"X-Booked-UserId": sessionUserId
@@ -375,10 +373,10 @@
 			});
 		}
 		
-		function deleteReservation(bookingId){
+		function deleteReservation(reservationId){
 			return $.ajax({
 				method: "DELETE",
-				url: "/Web/Services/index.php/Reservations/" + bookingId,
+				url: "/Web/Services/index.php/Reservations/" + reservationId,
 				dataType: "json",
 				headers: {
 					"X-Booked-SessionToken": sessionToken,
@@ -388,7 +386,7 @@
 		}
 				
 		function setHandlers(){
-			$(".addBookingButton").off("click").on("click", function(){
+			$(".addReservationButton").off("click").on("click", function(){
 				/*
 				promptPhonenumber()
 				.then(function(phonenumber){
@@ -400,10 +398,7 @@
 					}
 				})
 				*/
-				promptAddBooking()
-				.then(showPass)
-				.then(fetchBookingData)
-				.fail(showFail);
+				showAddReservation();
 			});
 		}
 		
@@ -418,9 +413,8 @@
 		}
 		
 		function showFail(e){
-			console.error(e);
 			$("#failWindow").show();
-			$("#failWindow #errorMessage").text(JSON.stringify(e));
+			$("#failWindow #errorMessage").text(e);
 			
 			$("#failWindow .okButton").off("click").on("click", function(){
 				$("#failWindow").hide();
@@ -439,7 +433,7 @@
 			showLoading();
 			getReservationId();
 			updateTime();
-			updateBookingView(mockData);
+			updateReservationView(mockData);
 			
 			fetchToken()
 			.then(fetchResourceData)
@@ -472,14 +466,14 @@
 	<div class="innerContainer">
 		<img id="imageLogo" src="symbio_logo.svg" alt="logo"/>
 		<span id="roomName">roomName</span>
-		<button id="addBookingButton" class="button addBookingButton">Add Booking</button>
+		<button id="addReservationButton" class="button addReservationButton">Add Reservation</button>
 	</div>
 </div>
 
 <div style="clear:both"></div>
 
 <div class="container3">
-	<div id="bookingList">
+	<div id="reservationList">
 	</div>
 </div>
 
@@ -494,9 +488,9 @@
 	</div>
 </div>
 
-<div id="addBookingWindow" class="modalContainer">
+<div id="addReservationWindow" class="modalContainer">
 	<div class="innerContainer">
-		<p>Add Booking</p>
+		<p>Add Reservation</p>
 		<div>
 			<input id="title" type="text" class="textInput" value="title"/>
 		</div>
