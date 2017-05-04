@@ -231,17 +231,27 @@
 			}
 			
 			$("#reservationList").html(l.join("\n"));
-			//transformView();
+			
+			transformOut();
+			setTimeout(transformIn(), 1000);
 		}
 		
-		function transformView(){
+		function transformOut(){
 			var l = $(".reservationItem");
-			var d = 360/l.length;
 			
 			for(var i=0; i<l.length; i++){
 				var key = "transform";
-				var value = "rotateY(" + (d*i) + "deg" + ")";
-				console.log(key + ":" + value);
+				var value = "translate(100vw, 0) rotateY(90deg)";
+				$(l[i]).css(key, value);
+			}
+		}
+		
+		function transformIn(){
+			var l = $(".reservationItem");
+		
+			for(var i=0; i<l.length; i++){
+				var key = "transform";
+				var value = "translate(0, 0) rotateY(0deg)";
 				$(l[i]).css(key, value);
 			}
 		}
@@ -491,9 +501,7 @@
 
 <div style="clear:both"></div>
 
-<div class="container3">
-	<div id="reservationList">
-	</div>
+<div id="reservationList" class="container3">
 </div>
 
 <div id="phonenumberWindow" class="modalContainer">

@@ -53,7 +53,8 @@
 	background-color:grey;
 	padding:10px;
 	display:inline-block;
-	transition: all 1s ease;
+	transition: 1s linear all;
+	transform: translate(100vw, 0) rotateY(90deg)
 }
 
 #currentTime{
