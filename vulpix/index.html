@@ -200,11 +200,12 @@
 		};
 		
 		function cancelReservation(reservationId){
-			console.log(reservationId);
+			showLoading();
 			deleteReservation(reservationId)
 			.then(showPass)
 			.then(fetchReservationsData)
-			.fail(showFail);
+			.fail(showFail)
+			.always(hideLoading);
 		}
 		
 		function extendReservation(reservationId){
@@ -345,6 +346,7 @@
 			$("#addReservationWindow .inputForm").off("submit").on("submit", function(){
 				userId = "1";
 				
+				showLoading();
 				postReservation({
 					"userId": userId,
 					"resourceId": resourceId,
@@ -361,7 +363,8 @@
 				})
 				.then(showPass)
 				.then(fetchReservationsData)
-				.fail(showFail);
+				.fail(showFail)
+				.always(hideLoading);
 			});
 		}
 		
