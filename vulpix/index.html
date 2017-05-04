@@ -343,12 +343,12 @@
 				$("#addReservationWindow").hide();
 			});
 			
-			$("#addReservationWindow input").off("click").on("focus", function(){
+			$("#addReservationWindow input").off("focus").on("focus", function(){
 				var top = $(this).offset().top;
 				$(window).scrollTop(top);
 			});
 			
-			$("#addReservationWindow .inputForm").off("click").on("submit", function(){
+			$("#addReservationWindow .inputForm").off("submit").on("submit", function(){
 				showLoading();
 				postReservation({
 					"userId": sessionUserId,
