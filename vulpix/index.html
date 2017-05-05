@@ -341,7 +341,7 @@
 		
 		function formatDateTime(dateTimeString){
 			var d = new Date(dateTimeString);
-			var r = d.toJSON();
+			var r = d.toISOString();
 			return r;
 		}
 		
