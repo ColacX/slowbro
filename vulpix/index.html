@@ -7,7 +7,7 @@
 	<link rel="stylesheet" href="index.css">
 	<script src="jquery-3.2.1.min.js"></script>
 	<script type="text/javascript">
-		console.log("version: 2017-05-05");
+		console.log("version: Fri May 05 2017 13:48:29 GMT+0200 (W. Europe Summer Time)");
 	
 		var locale = "SV-sv";
 		var sessionToken = null;
@@ -406,6 +406,7 @@
 			return $.ajax({
 				method: "POST",
 				url: "/Web/Services/index.php/Reservations/",
+				contentType: "application/json; charset=utf-8",
 				dataType: "json",
 				data: JSON.stringify(reservationData),
 				headers: {
