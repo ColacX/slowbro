@@ -5,7 +5,9 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
 	<title>vulpix</title>
 	<link rel="stylesheet" href="index.css">
+	<link rel="stylesheet" href="jquery.datetimepicker.min.css">
 	<script src="jquery-3.2.1.min.js"></script>
+	<script src="jquery.datetimepicker.full.min.js"></script>
 	<script type="text/javascript">
 		console.log("version: Fri May 05 2017 13:48:29 GMT+0200 (W. Europe Summer Time)");
 	
@@ -373,6 +375,10 @@
 		
 		function showAddReservation(userId){
 			$("#addReservationWindow").show();
+			$.datetimepicker.setLocale('sv');
+			$("#startDateTime").datetimepicker();
+			$("#endDateTime").datetimepicker();
+			
 			$("#addReservationWindow .textInput").focus();
 			
 			$("#addReservationWindow .cancelButton").off("click").on("click", function(){
