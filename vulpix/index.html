@@ -342,27 +342,31 @@
 		}
 		
 		function formatDateTime(dateTimeString){
+			console.log(dateTimeString);
+			
 			//var d = new Date(dateTimeString);
 			//var r = d.toISOString();
 			//return r;
 			
 			//ISO 8601
-			var now = new Date(dateTimeString),
-				tzo = -now.getTimezoneOffset(),
+			var d = new Date(dateTimeString);
+			d.setMinutes(d.getMinutes() + d.getTimezoneOffset());
+			var	tzo = -d.getTimezoneOffset(),
 				dif = tzo >= 0 ? '+' : '-',
 				pad = function(num) {
 					var norm = Math.abs(Math.floor(num));
 					return (norm < 10 ? '0' : '') + norm;
 				};
-			var r = now.getFullYear() 
-				+ '-' + pad(now.getMonth()+1)
-				+ '-' + pad(now.getDate())
-				+ 'T' + pad(now.getHours())
-				+ ':' + pad(now.getMinutes()) 
-				+ ':' + pad(now.getSeconds()) 
+			var r = d.getFullYear() 
+				+ '-' + pad(d.getMonth()+1)
+				+ '-' + pad(d.getDate())
+				+ 'T' + pad(d.getHours())
+				+ ':' + pad(d.getMinutes()) 
+				+ ':' + pad(d.getSeconds()) 
 				+ dif + pad(tzo / 60) 
 				+ ':' + pad(tzo % 60);
-				
+			
+			console.log(r);	
 			return r;
 		}
 		
