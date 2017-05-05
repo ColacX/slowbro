@@ -345,15 +345,12 @@
 		
 		function formatDateTime(dateTimeString){
 			console.log(dateTimeString);
-			alert(dateTimeString);
-			
 			//var d = new Date(dateTimeString);
 			//var r = d.toISOString();
 			//return r;
 			
 			//ISO 8601
 			var d = new Date(dateTimeString);
-			d.setMinutes(d.getMinutes() + d.getTimezoneOffset());
 			var	tzo = -d.getTimezoneOffset(),
 				dif = tzo >= 0 ? '+' : '-',
 				pad = function(num) {
@@ -369,7 +366,6 @@
 				+ dif + pad(tzo / 60) 
 				+ ':' + pad(tzo % 60);
 			
-			alert(r);
 			return r;
 		}
 		
