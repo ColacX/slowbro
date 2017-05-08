@@ -360,22 +360,10 @@
 		
 		function showAddReservation(userId){
 			$("#addReservationWindow").show();
-			//$.datetimepicker.setLocale('sv');
-			//$("#startDateTime").datetimepicker();
-			//$("#endDateTime").datetimepicker();
-			
-			$("#addReservationWindow .textInput").focus();
 			
 			$("#addReservationWindow .cancelButton").off("click").on("click", function(){
 				$("#addReservationWindow").hide();
 			});
-			
-			/*
-			$("#addReservationWindow input").off("focus").on("focus", function(){
-				var top = $(this).offset().top;
-				$(window).scrollTop(top);
-			});
-			*/
 			
 			$("#addReservationWindow .inputForm").off("submit").on("submit", function(){
 				showLoading();
