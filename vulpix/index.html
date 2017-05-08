@@ -343,24 +343,19 @@
 			return d.promise();
 		}
 		
-		function formatDateTime(dateTimeString){
+		function formatDateTime(dateString, timeString){
 			//ISO 8601
-			var d = new Date(dateTimeString);
-			var	tzo = -d.getTimezoneOffset(),
-				dif = tzo >= 0 ? '+' : '-',
-				pad = function(num) {
-					var norm = Math.abs(Math.floor(num));
-					return (norm < 10 ? '0' : '') + norm;
-				};
-			var r = d.getFullYear() 
-				+ '-' + pad(d.getMonth()+1)
-				+ '-' + pad(d.getDate())
-				+ 'T' + pad(d.getHours())
-				+ ':' + pad(d.getMinutes()) 
-				+ ':' + pad(d.getSeconds()) 
-				+ dif + pad(tzo / 60) 
-				+ ':' + pad(tzo % 60);
-			
+			var d = new Date(dateString + "T" + timeString + "+02:00");
+			console.log(d);
+			var	tzo = -d.getTimezoneOffset();
+			var sign = tzo >= 0 ? '+' : '-';
+			var pad = function(num) {
+				var norm = Math.abs(Math.floor(num));
+				return (norm < 10 ? '0' : '') + norm;
+			};
+			var r = dateString + "T" + timeString
+				+ sign + pad(tzo / 60) + ':' + pad(tzo % 60);
+			console.log(r);
 			return r;
 		}
 		
@@ -385,11 +380,12 @@
 			
 			$("#addReservationWindow .inputForm").off("submit").on("submit", function(){
 				showLoading();
+				
 				postReservation({
 					"userId": sessionUserId,
 					"resourceId": resourceId,
-					"startDateTime": formatDateTime($("#addReservationWindow #startDateTime").val()),
-					"endDateTime": formatDateTime($("#addReservationWindow #endDateTime").val()),
+					"startDateTime": formatDateTime($("#addReservationWindow #startDate").val(), $("#addReservationWindow #startTime").val()),
+					"endDateTime": formatDateTime($("#addReservationWindow #endDate").val(), $("#addReservationWindow #endTime").val()),
 					"title": $("#addReservationWindow #title").val(),
 					"description": "reservation description",
 					"recurrenceRule":{
@@ -552,18 +548,20 @@
 	<div class="innerContainer">
 		<p>Add Reservation</p>
 		<form class="inputForm" onsubmit="return false;">
-			<div>
-				<input id="title" type="text" class="textInput" placeholder="Booking title" autofocus required/>
-			</div>
-			<div>
-				<input id="startDateTime" type="datetime-local" required onkeydown="return false;"/>
-			</div>
-			<div>
-				<input id="endDateTime" type="datetime-local" required onkeydown="return false;"/>
-				<input type="date" required onkeydown="return false;"/>
-				<input type="datetime" required onkeydown="return false;"/>
-				<input type="time" required onkeydown="return false;"/>
-			</div>
+			<fieldset>
+				<legend>Title</legend>
+				<input id="title" type="text" class="textInput" placeholder="Booking title" required/>
+			</fieldset>
+			<fieldset>
+				<legend>Start</legend>
+				<input id="startDate" type="date" required/>
+				<input id="startTime" type="time" required/>
+			</fieldset>
+			<fieldset>
+				<legend>End</legend>
+				<input id="endDate" type="date" required/>
+				<input id="endTime" type="time" required/>
+			</fieldset>
 			<div>
 				<input type="button" class="button cancelButton" value="CANCEL"/>
 				<input type="submit" class="button okButton" value="OK"/>
