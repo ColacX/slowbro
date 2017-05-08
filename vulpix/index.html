@@ -376,10 +376,12 @@
 				$("#addReservationWindow").hide();
 			});
 			
+			/*
 			$("#addReservationWindow input").off("focus").on("focus", function(){
 				var top = $(this).offset().top;
 				$(window).scrollTop(top);
 			});
+			*/
 			
 			$("#addReservationWindow .inputForm").off("submit").on("submit", function(){
 				showLoading();
@@ -558,6 +560,9 @@
 			</div>
 			<div>
 				<input id="endDateTime" type="datetime-local" required onkeydown="return false;"/>
+				<input type="date" required onkeydown="return false;"/>
+				<input type="datetime" required onkeydown="return false;"/>
+				<input type="time" required onkeydown="return false;"/>
 			</div>
 			<div>
 				<input type="button" class="button cancelButton" value="CANCEL"/>
