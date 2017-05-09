@@ -235,12 +235,28 @@ function showPass(){
 
 function showFail(e){
 	console.error(e);
-	$("#failWindow").show();
-	$("#failWindow #errorMessage").text(JSON.stringify(e));
+	var m = "Default error";
+	
+	if(!e){
+		m = "Unknown error";
+	}
+	else if(e.readyState == 0){
+		m = "Could not send request to the server";
+	}
+	else if(e.responseJSON && e.responseJSON.errors){
+		m = e.responseJSON.errors.join("\n");
+	}
+	else{
+		m = JSON.stringify(e);
+	}
+	
+	$("#failWindow #errorMessage").text(m);
 	
 	$("#failWindow .okButton").off("click").on("click", function(){
 		$("#failWindow").hide();
 	});
+	
+	$("#failWindow").show();
 }
 
 function showLoading(){
