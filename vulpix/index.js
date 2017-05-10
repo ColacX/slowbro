@@ -14,10 +14,9 @@ function updateTime(){
 };
 
 function cancelReservation(reservationId){
-	showLoading();
-	
 	promptConfirm()
 	.then(function(){
+		showLoading();
 		deleteReservation(reservationId)
 		.then(showPass)
 		.then(fetchReservationsData)
