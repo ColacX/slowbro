@@ -66,3 +66,16 @@ div.control{
     border-radius: 12px;
     outline: none;
 }
+
+.timerButtonBook {
+    background-color: #008CBA; /* Blue */
+    border: none;
+    color: white;
+    padding: 15px 32px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 23px;
+    border-radius: 12px;
+    outline: none;
+}
