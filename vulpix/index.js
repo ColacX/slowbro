@@ -36,10 +36,28 @@ function updateReservationView(reservationItems){
 		var item = reservationItems[i];
 		var s = new Date(item.startDate);
 		var e = new Date(item.endDate);
-		l.push("<figure class='reservationItem'>");
+		var n = new Date();
+		
+		l.push("<figure 'id=\"ri-" + item.referenceNumber + "\"' class='reservationItem'>");
 		l.push("	<p>" + item.title + "</p>");
 		l.push("	<p>" + s.toLocaleString(locale, {year: "numeric", month: "numeric", weekday: "long", day:"numeric", hour: "2-digit", minute: "2-digit"}) + "</p>");
 		l.push("	<p>" + e.toLocaleString(locale, {year: "numeric", month: "numeric", weekday: "long", day:"numeric",  hour: "2-digit", minute: "2-digit"}) + "</p>");
+		
+		console.log(s <= n && n <= e);
+		
+		if(s <= n && n <= e){
+			l.push("	<div class='reservationRunning'>");
+			l.push("		<img src='pikachu_running.gif' alt='image failed' width='80' height='57'/>");
+			l.push("		<p>Ongoing</p>");
+			l.push("	</div>");
+		}
+		else{
+			l.push("	<div class='reservationImpending'>");
+			l.push("		<img src='pikachu_sleeping.gif' alt='image failed' width='57' height='57'/>");
+			l.push("		<p>Impending</p>");
+			l.push("	</div>");
+		}
+		
 		l.push("	<div>");
 		l.push("		<button class='button cancelReservationButton' onclick='cancelReservation(\"" + item.referenceNumber + "\")'>Cancel Reservation</button>");
 		l.push("		<button class='button extendReservationButton' onclick='extendReservation(\"" + item.referenceNumber + "\")'>Extend Reservation</button>");
@@ -358,7 +376,7 @@ $(document).ready(function(){
 	showLoading();
 	getReservationId();
 	updateTime();
-	//updateReservationView(mockData);
+	//updateReservationView(mockdata.reservations);
 	
 	fetchToken()
 	.then(fetchResourceData)
