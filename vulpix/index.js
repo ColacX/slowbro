@@ -265,7 +265,7 @@ function deleteReservation(reservationId){
 
 function showPass(){
 	$("#passWindow").show();
-	$("#passWindow .okButton").off("click").on("click", function(){
+	$("#passWindow").off("click").on("click", function(){
 		$("#passWindow").hide();
 	});
 }
@@ -289,7 +289,7 @@ function showFail(e){
 	
 	$("#failWindow #errorMessage").text(m);
 	
-	$("#failWindow .okButton").off("click").on("click", function(){
+	$("#failWindow").off("click").on("click", function(){
 		$("#failWindow").hide();
 	});
 	
