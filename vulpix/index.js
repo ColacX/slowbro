@@ -182,6 +182,8 @@ function showAddReservation(userId){
 		format: "HH:i",
 		formatLabel: "HH:i",
 		formatSubmit: "HH:i",
+		min:[8,00],
+		max:[18,00]
 	});
 	
 	$("#startDate").pickadate({
@@ -199,6 +201,8 @@ function showAddReservation(userId){
 		format: "HH:i",
 		formatLabel: "HH:i",
 		formatSubmit: "HH:i",
+		min:[8,00],
+		max:[18,00],
 		onSet: function() {
 			var startTime = $("#startTime").val();
 			console.log(startTime);
