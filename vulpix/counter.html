@@ -12,7 +12,7 @@
 	<script type="text/javascript">
     // Timer function for 30 minute room
     function _timer(callback){
-        var time = 1800;     //  The default time of the timer
+        var time = 1000;     //  The default time of the timer
         var mode = 1;     //    Mode: count up or count down
         var status = 0;    //    Status: timer is running or stoped
         var timer_id;    //    This is used by setInterval function
@@ -160,11 +160,12 @@
             <span class="hour">00</span>:<span class="minute">30</span>:<span class="second">00</span>
         </div>
         <div class="control">
+            <button id="timerButton" class="timerButtonBook" onClick="timer.reset(1800);timer.start()">Book Room</button> 
+            <!--
+                Possible button actions
             <button id="timerButton" class="timerButtonStart" onClick="timer.start(1000)">Start</button> 
             <button id="timerButton" class="timerButtonStop" onClick="timer.stop()">Stop</button> 
             <button id="timerButton" class="timerButtonReset" onClick="timer.reset(1800)">Reset</button> 
-            <!--
-                Don't need these actions for now
             <button onClick="timer.mode(1)">Count up</button> 
             <button onClick="timer.mode(0)">Count down</button>
             -->
