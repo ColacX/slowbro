@@ -44,16 +44,10 @@ function updateReservationView(reservationItems){
 		l.push("	<p>" + e.toLocaleString(locale, {year: "numeric", month: "numeric", weekday: "long", day:"numeric",  hour: "2-digit", minute: "2-digit"}) + "</p>");
 		
 		if(s <= n && n <= e){
-			l.push("	<div class='reservationRunning'>");
-			l.push("		<img src='pikachu_running.gif' alt='image failed' width='80' height='57'/>");
-			l.push("		<p>Ongoing</p>");
-			l.push("	</div>");
+			l.push($("#reservationRunningTemplate").html());
 		}
 		else{
-			l.push("	<div class='reservationImpending'>");
-			l.push("		<img src='pikachu_sleeping.gif' alt='image failed' width='57' height='57'/>");
-			l.push("		<p>Impending</p>");
-			l.push("	</div>");
+			l.push($("#reservationImpendingTemplate").html());
 		}
 		
 		l.push("	<div>");

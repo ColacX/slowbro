@@ -23,6 +23,19 @@
 </head>
 <body class="rootContainer">
 
+<template id="reservationRunningTemplate">
+<div class="reservationRunning">
+	<img src="pikachu_running.gif" alt="image failed" width="80" height="57">
+	<p>Running</p>
+</div>
+</template>
+
+<template id="reservationImpendingTemplate">
+<div class="reservationImpending">
+	<img src="pikachu_sleeping.gif" alt="image failed" width="57" height="57">
+	<p>Impending</p>
+</div>
+</template>
 
 <video id="videoBackground" autoplay muted loop>
   <source src="background.mp4" type="video/mp4">
@@ -85,8 +98,6 @@
 		</form>
 	</div>
 </div>
-
-
 
 <div id="failWindow" class="modalContainer">
 	<div class="innerContainer">
