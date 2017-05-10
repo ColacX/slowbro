@@ -37,10 +37,10 @@ function updateReservationView(reservationItems){
 		l.push("	<p>" + item.title + "</p>");
 		l.push("	<p>" + s.toLocaleString(locale, {year: "numeric", month: "numeric", weekday: "long", day:"numeric", hour: "2-digit", minute: "2-digit"}) + "</p>");
 		l.push("	<p>" + e.toLocaleString(locale, {year: "numeric", month: "numeric", weekday: "long", day:"numeric",  hour: "2-digit", minute: "2-digit"}) + "</p>");
-		l.push("	<div>");
-		l.push("		<button class='button cancelReservationButton' onclick='cancelReservation(\"" + item.referenceNumber + "\")'>Cancel Reservation</button>");
-		l.push("		<button class='button extendReservationButton' onclick='extendReservation(\"" + item.referenceNumber + "\")'>Extend Reservation</button>");
-		l.push("	</div>");
+		//l.push("	<div>");
+		//l.push("		<button class='button cancelReservationButton' onclick='cancelReservation(\"" + item.referenceNumber + "\")'>Cancel Reservation</button>");
+		//l.push("		<button class='button extendReservationButton' onclick='extendReservation(\"" + item.referenceNumber + "\")'>Extend Reservation</button>");
+		//l.push("	</div>");
 		l.push("</figure>");
 	}
 	
@@ -171,6 +171,43 @@ function formatDateTime(dateString, timeString){
 
 function showAddReservation(userId){
 	$("#addReservationWindow").show();
+	
+	$("#endDate").pickadate({
+		format: "yyyy-mm-dd",
+		formatSubmit: "yyyy-mm-dd",
+		min: startDate
+	});
+	
+	$("#endTime").pickatime({
+		format: "HH:i",
+		formatLabel: "HH:i",
+		formatSubmit: "HH:i",
+		min:[8,00],
+		max:[18,00]
+	});
+	
+	$("#startDate").pickadate({
+		format: "yyyy-mm-dd",
+		formatSubmit: "yyyy-mm-dd",
+		min: new Date(),
+		onSet: function() {
+			var startDate = new Date($("#startDate").val());
+			$("#endDate").pickadate("picker").set("min", startDate);
+			$("#endDate").pickadate("picker").set("select", startDate);
+		}
+	});
+	
+	$("#startTime").pickatime({
+		format: "HH:i",
+		formatLabel: "HH:i",
+		formatSubmit: "HH:i",
+		min:[8,00],
+		max:[18,00],
+		onSet: function() {
+			var startTime = $("#startTime").val();
+			console.log(startTime);
+		}
+	});
 	
 	$("#addReservationWindow .cancelButton").off("click").on("click", function(){
 		$("#addReservationWindow").hide();

@@ -4,11 +4,24 @@
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
 	<title>vulpix</title>
+	
+	<!-- styles -->
+	<link rel="stylesheet" href="pickadate.js-3.5.6/themes/default.css">
+	<link rel="stylesheet" href="pickadate.js-3.5.6/themes/default.date.css">
+	<link rel="stylesheet" href="pickadate.js-3.5.6/themes/default.time.css">
 	<link rel="stylesheet" href="index.css">
+	
+	<!-- scripts -->
 	<script src="jquery-3.2.1.min.js"></script>
+	<script src="pickadate.js-3.5.6/picker.js"></script>
+	<script src="pickadate.js-3.5.6/picker.date.js"></script>
+	<script src="pickadate.js-3.5.6/picker.time.js"></script>
+	<script src="pickadate.js-3.5.6/legacy.js"></script>
+	<script src="pickadate.js-3.5.6/translations/sv_SE.js"></script>
 	<script src="index.js"></script>
 </head>
 <body class="rootContainer">
+
 
 <video id="videoBackground" autoplay muted loop>
   <source src="background.mp4" type="video/mp4">
@@ -56,13 +69,13 @@
 			</fieldset>
 			<fieldset>
 				<legend>Start</legend>
-				<input id="startDate" type="date" required/>
-				<input id="startTime" type="time" required/>
+				<input id="startDate" type="text" required readonly/>
+				<input id="startTime" type="text" required readonly/>
 			</fieldset>
 			<fieldset>
 				<legend>End</legend>
-				<input id="endDate" type="date" required/>
-				<input id="endTime" type="time" required/>
+				<input id="endDate" type="text" required readonly/>
+				<input id="endTime" type="text" required readonly/>
 			</fieldset>
 			<div>
 				<input type="button" class="button cancelButton" value="CANCEL"/>
@@ -71,6 +84,8 @@
 		</form>
 	</div>
 </div>
+
+
 
 <div id="failWindow" class="modalContainer">
 	<div class="innerContainer">
