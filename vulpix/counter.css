@@ -13,6 +13,13 @@ div.timer {
     margin-left: -175px;
 }
 
+.containerTimer{
+	text-align:center;
+	padding:10px;
+	width:100vw;
+	background-color:black;
+}
+
 div.control{
     font-size:72px;
     font-family:"Courier New", Courier, monospace;
