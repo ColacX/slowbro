@@ -17,11 +17,13 @@ function cancelReservation(reservationId){
 	showLoading();
 	
 	promptConfirm()
-	.then(deleteReservation(reservationId))
-	.then(showPass)
-	.then(fetchReservationsData)
-	.fail(showFail)
-	.always(hideLoading);
+	.then(function(){
+		deleteReservation(reservationId)
+		.then(showPass)
+		.then(fetchReservationsData)
+		.fail(showFail)
+		.always(hideLoading);
+	});
 }
 
 function extendReservation(reservationId){
