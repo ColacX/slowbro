@@ -15,7 +15,9 @@ function updateTime(){
 
 function cancelReservation(reservationId){
 	showLoading();
-	deleteReservation(reservationId)
+	
+	promptConfirm()
+	.then(deleteReservation(reservationId))
 	.then(showPass)
 	.then(fetchReservationsData)
 	.fail(showFail)
@@ -23,7 +25,7 @@ function cancelReservation(reservationId){
 }
 
 function extendReservation(reservationId){
-	console.log(reservationId);
+	console.log("extendReservation");
 }
 
 function updateReservationView(reservationItems){
@@ -37,10 +39,10 @@ function updateReservationView(reservationItems){
 		l.push("	<p>" + item.title + "</p>");
 		l.push("	<p>" + s.toLocaleString(locale, {year: "numeric", month: "numeric", weekday: "long", day:"numeric", hour: "2-digit", minute: "2-digit"}) + "</p>");
 		l.push("	<p>" + e.toLocaleString(locale, {year: "numeric", month: "numeric", weekday: "long", day:"numeric",  hour: "2-digit", minute: "2-digit"}) + "</p>");
-		//l.push("	<div>");
-		//l.push("		<button class='button cancelReservationButton' onclick='cancelReservation(\"" + item.referenceNumber + "\")'>Cancel Reservation</button>");
-		//l.push("		<button class='button extendReservationButton' onclick='extendReservation(\"" + item.referenceNumber + "\")'>Extend Reservation</button>");
-		//l.push("	</div>");
+		l.push("	<div>");
+		l.push("		<button class='button cancelReservationButton' onclick='cancelReservation(\"" + item.referenceNumber + "\")'>Cancel Reservation</button>");
+		l.push("		<button class='button extendReservationButton' onclick='extendReservation(\"" + item.referenceNumber + "\")'>Extend Reservation</button>");
+		l.push("	</div>");
 		l.push("</figure>");
 	}
 	
@@ -130,6 +132,23 @@ function getReservationId(){
 	}
 	
 	resourceId = argMap["resourceId"];
+}
+
+function promptConfirm(){
+	var d = $.Deferred();
+	$("#confirmWindow").show();
+	
+	$("#confirmWindow .cancelButton").off("click").on("click", function(){
+		$("#confirmWindow").hide();
+		d.reject();
+	});
+	
+	$("#confirmWindow .okButton").off("click").on("click", function(){
+		$("#confirmWindow").hide();
+		d.resolve();
+	});
+	
+	return d.promise();
 }
 
 function promptPhonenumber(){
