@@ -162,6 +162,10 @@
 	z-index:-1;
 }
 
+.picker__list{
+	padding:0;
+}
+
 @media screen and (orientation:portrait) {
 .container1{
 	width:100vw;
