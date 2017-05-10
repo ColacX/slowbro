@@ -1,4 +1,4 @@
-console.log("version: Fri May 05 2017 16:36:29 GMT+0200 (W. Europe Summer Time)");
+console.log("version datetime: Wed May 10 2017 16:36:44 GMT+0200 (W. Europe Summer Time)");
 	
 var locale = "SV-sv";
 var sessionToken = null;
