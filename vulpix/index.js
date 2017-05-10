@@ -172,6 +172,28 @@ function formatDateTime(dateString, timeString){
 function showAddReservation(userId){
 	$("#addReservationWindow").show();
 	
+	$("#startDate").pickadate({
+		format: "yyyy-mm-dd",
+		formatSubmit: "yyyy-mm-dd"
+	});
+	
+	$("#startTime").pickatime({
+		format: "HH:i",
+		formatLabel: "HH:i",
+		formatSubmit: "HH:i"
+	});
+	
+	$("#endDate").pickadate({
+		format: "yyyy-mm-dd",
+		formatSubmit: "yyyy-mm-dd"
+	});
+	
+	$("#endTime").pickatime({
+		format: "HH:i",
+		formatLabel: "HH:i",
+		formatSubmit: "HH:i"
+	});
+	
 	$("#addReservationWindow .cancelButton").off("click").on("click", function(){
 		$("#addReservationWindow").hide();
 	});
