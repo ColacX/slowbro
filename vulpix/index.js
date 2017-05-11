@@ -1,4 +1,4 @@
-console.log("version: Fri May 05 2017 16:36:29 GMT+0200 (W. Europe Summer Time)");
+console.log("version datetime: Wed May 10 2017 16:36:44 GMT+0200 (W. Europe Summer Time)");
 	
 var locale = "SV-sv";
 var sessionToken = null;
@@ -14,10 +14,9 @@ function updateTime(){
 };
 
 function cancelReservation(reservationId){
-	showLoading();
-	
 	promptConfirm()
 	.then(function(){
+		showLoading();
 		deleteReservation(reservationId)
 		.then(showPass)
 		.then(fetchReservationsData)
@@ -37,10 +36,20 @@ function updateReservationView(reservationItems){
 		var item = reservationItems[i];
 		var s = new Date(item.startDate);
 		var e = new Date(item.endDate);
-		l.push("<figure class='reservationItem'>");
+		var n = new Date();
+		
+		l.push("<figure 'id=\"ri-" + item.referenceNumber + "\"' class='reservationItem'>");
 		l.push("	<p>" + item.title + "</p>");
 		l.push("	<p>" + s.toLocaleString(locale, {year: "numeric", month: "numeric", weekday: "long", day:"numeric", hour: "2-digit", minute: "2-digit"}) + "</p>");
 		l.push("	<p>" + e.toLocaleString(locale, {year: "numeric", month: "numeric", weekday: "long", day:"numeric",  hour: "2-digit", minute: "2-digit"}) + "</p>");
+		
+		if(s <= n && n <= e){
+			l.push($("#reservationRunningTemplate").html());
+		}
+		else{
+			l.push($("#reservationImpendingTemplate").html());
+		}
+		
 		l.push("	<div>");
 		l.push("		<button class='button cancelReservationButton' onclick='cancelReservation(\"" + item.referenceNumber + "\")'>Cancel Reservation</button>");
 		l.push("		<button class='button extendReservationButton' onclick='extendReservation(\"" + item.referenceNumber + "\")'>Extend Reservation</button>");
@@ -359,7 +368,7 @@ $(document).ready(function(){
 	showLoading();
 	getReservationId();
 	updateTime();
-	//updateReservationView(mockData);
+	//updateReservationView(mockdata.reservations);
 	
 	fetchToken()
 	.then(fetchResourceData)
