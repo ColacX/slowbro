@@ -51,6 +51,7 @@
 .reservationItem{
 	background-color:grey;
 	padding:10px;
+	margin-top:25px;
 	display:inline-block;
 	transition: 1s linear all;
 	transform: translate(100vw, 0) rotateY(90deg)
@@ -68,17 +69,20 @@
 	font-size:100px;
 	font-weight: bold;
 	display:block;
+	color:white;
 }
 
 #currentDate{
 	font-size:25px;
 	display:block;
+	color:white;
 }
 
 #roomName{
 	font-size:50px;
 	font-weight: bold;
 	display:block;
+	color:white;
 }
 
 #imageLogo{
