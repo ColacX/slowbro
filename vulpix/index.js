@@ -38,7 +38,7 @@ function updateReservationView(reservationItems){
 		var e = new Date(item.endDate);
 		var n = new Date();
 		
-		l.push("<figure 'id=\"ri-" + item.referenceNumber + "\"' class='reservationItem'>");
+		l.push("<figure 'id=\"ri-" + item.referenceNumber + "\"' class='reservationItem rainbowBorder'>");
 		l.push("	<p>" + item.title + "</p></br>");
 		l.push("	<p>" + s.toLocaleString(locale, {year: "numeric", month: "numeric", weekday: "long", day:"numeric", hour: "2-digit", minute: "2-digit"}) + "</p></br>");
 		l.push("	<p>" + e.toLocaleString(locale, {year: "numeric", month: "numeric", weekday: "long", day:"numeric",  hour: "2-digit", minute: "2-digit"}) + "</p>");
