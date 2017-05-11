@@ -4,8 +4,17 @@ var locale = "SV-sv";
 var sessionToken = null;
 var sessionUserId = null;
 var resourceId = null;
+var videoId = null;
 var username = "tablet";
 var password = "tab1234!";
+
+
+
+function getURLParameter(name) {
+  return decodeURIComponent((new RegExp('[?|&]' + name + '=' + '([^&;]+?)(&|#|;|$)').exec(location.search) || [null, ''])[1].replace(/\+/g, '%20')) || null;
+}
+
+videoId = getURLParameter('videoId');
 
 function updateTime(){
 	var d = new Date();
@@ -184,7 +193,7 @@ function _timer(callback){
     this.start = function(interval)
     {
         $('.containerTimer').css('background-color','red');
-        document.getElementById('timerButton').textContent = "Locked";
+        document.getElementById('timerButton').textContent = "Room Busy";
         interval = (typeof(interval) !== 'undefined') ? interval : 1000;
 
         if(status == 0)
