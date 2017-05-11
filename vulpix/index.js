@@ -48,9 +48,11 @@ function updateReservationView(reservationItems){
 		l.push("	<p>" + e.toLocaleString(locale, {year: "numeric", month: "numeric", day:"numeric"}) + "</p></br>");
 		
 		if(s <= n && n <= e){
+			l.push("<div class='pikachuHolder'></div>");
 			l.push($("#reservationRunningTemplate").html());
 		}
 		else{
+			l.push("<div class='pikachuHolder'></div>");
 			l.push("	<div>");
 			l.push("		<button class='button cancelReservationButton' onclick='cancelReservation(\"" + item.referenceNumber + "\")'>Cancel Reservation</button>");
 			//l.push("		<button class='button extendReservationButton' onclick='extendReservation(\"" + item.referenceNumber + "\")'>Extend Reservation</button>");
@@ -338,7 +340,7 @@ function hideLoading(){
 }
 
 function runHarlemShake(){
-	$("button").before($("#pikachuDancingTemplate").html());
+	$(".pikachuHolder").append($("#pikachuDancingTemplate").html());
 	
 	setTimeout(function(){
 		$(".pikachuDancing").remove();
