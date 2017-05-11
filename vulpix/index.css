@@ -39,11 +39,11 @@
 }
 
 .reservationItem{
+	vertical-align: top;
 	border-radius: 25px;
     border: 2px solid #73AD21;
 	color: #ffffff;
 	padding:10px;
-	margin-top:25px;
 	display:inline-block;
 	transition: 1s linear all;
 	transform: translate(100vw, 0) rotateY(90deg)
@@ -51,11 +51,11 @@
 
 
 .reservationRunning{
-	padding:20px;
+	padding:5px;
 }
 
 .reservationImpending{
-	padding:20px;
+	padding:5px;
 }
 
 #addReservationWindow fieldset{

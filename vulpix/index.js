@@ -38,7 +38,7 @@ function updateReservationView(reservationItems){
 		var e = new Date(item.endDate);
 		var n = new Date();
 		
-		l.push("<figure 'id=\"ri-" + item.referenceNumber + "\"' class='reservationItem rainbowBorder'>");
+		l.push("<div 'id=\"ri-" + item.referenceNumber + "\"' class='reservationItem rainbowBorder'>");
 		l.push("	<p>" + item.title + "</p></br>");
 		l.push("	<p>" + s.toLocaleString('en-UK', {weekday: "long"}));
 		l.push("	   " + s.toLocaleString('locale', {hour: "2-digit", minute: "2-digit"}) + "</p>");
@@ -51,14 +51,13 @@ function updateReservationView(reservationItems){
 			l.push($("#reservationRunningTemplate").html());
 		}
 		else{
-			l.push($("#reservationImpendingTemplate").html());
+			l.push("	<div>");
+			l.push("		<button class='button cancelReservationButton' onclick='cancelReservation(\"" + item.referenceNumber + "\")'>Cancel Reservation</button>");
+			l.push("		<button class='button extendReservationButton' onclick='extendReservation(\"" + item.referenceNumber + "\")'>Extend Reservation</button>");
+			l.push("	</div>");
 		}
 		
-		l.push("	<div>");
-		l.push("		<button class='button cancelReservationButton' onclick='cancelReservation(\"" + item.referenceNumber + "\")'>Cancel Reservation</button>");
-		l.push("		<button class='button extendReservationButton' onclick='extendReservation(\"" + item.referenceNumber + "\")'>Extend Reservation</button>");
-		l.push("	</div>");
-		l.push("</figure>");
+		l.push("</div>");
 	}
 	
 	$("#reservationList").html(l.join("\n"));
@@ -373,7 +372,7 @@ $(document).ready(function(){
 	getReservationId();
 	updateTime();
 	// mock data below 
-	updateReservationView(mockdata.reservations);
+	//updateReservationView(mockdata.reservations);
 	
 	fetchToken()
 	.then(fetchResourceData)
