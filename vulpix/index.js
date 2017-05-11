@@ -40,8 +40,12 @@ function updateReservationView(reservationItems){
 		
 		l.push("<figure 'id=\"ri-" + item.referenceNumber + "\"' class='reservationItem'>");
 		l.push("	<p>" + item.title + "</p></br>");
-		l.push("	<p>" + s.toLocaleString(locale, {year: "numeric", month: "numeric", weekday: "long", day:"numeric", hour: "2-digit", minute: "2-digit"}) + "</p></br>");
-		l.push("	<p>" + e.toLocaleString(locale, {year: "numeric", month: "numeric", weekday: "long", day:"numeric",  hour: "2-digit", minute: "2-digit"}) + "</p>");
+		l.push("	<p>" + s.toLocaleString('en-UK', {weekday: "long"}));
+		l.push("	   " + s.toLocaleString('locale', {hour: "2-digit", minute: "2-digit"}) + "</p>");
+		l.push("	<p>" + s.toLocaleString(locale, {year: "numeric", month: "numeric", day:"numeric"}) + "</p></br>");
+		l.push("	<p>" + e.toLocaleString('en-UK', {weekday: "long"}));
+		l.push("	   " + e.toLocaleString('locale', {hour: "2-digit", minute: "2-digit"}) + "</p>");
+		l.push("	<p>" + e.toLocaleString(locale, {year: "numeric", month: "numeric", day:"numeric"}) + "</p></br>");
 		
 		if(s <= n && n <= e){
 			l.push($("#reservationRunningTemplate").html());
@@ -369,7 +373,7 @@ $(document).ready(function(){
 	getReservationId();
 	updateTime();
 	// mock data below 
-	updateReservationView(mockdata.reservations);
+	//updateReservationView(mockdata.reservations);
 	
 	fetchToken()
 	.then(fetchResourceData)
