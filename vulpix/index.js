@@ -39,8 +39,8 @@ function updateReservationView(reservationItems){
 		var n = new Date();
 		
 		l.push("<figure 'id=\"ri-" + item.referenceNumber + "\"' class='reservationItem'>");
-		l.push("	<p>" + item.title + "</p>");
-		l.push("	<p>" + s.toLocaleString(locale, {year: "numeric", month: "numeric", weekday: "long", day:"numeric", hour: "2-digit", minute: "2-digit"}) + "</p>");
+		l.push("	<p>" + item.title + "</p></br>");
+		l.push("	<p>" + s.toLocaleString(locale, {year: "numeric", month: "numeric", weekday: "long", day:"numeric", hour: "2-digit", minute: "2-digit"}) + "</p></br>");
 		l.push("	<p>" + e.toLocaleString(locale, {year: "numeric", month: "numeric", weekday: "long", day:"numeric",  hour: "2-digit", minute: "2-digit"}) + "</p>");
 		
 		if(s <= n && n <= e){
@@ -368,7 +368,8 @@ $(document).ready(function(){
 	showLoading();
 	getReservationId();
 	updateTime();
-	//updateReservationView(mockdata.reservations);
+	// mock data below 
+	updateReservationView(mockdata.reservations);
 	
 	fetchToken()
 	.then(fetchResourceData)

@@ -15,9 +15,11 @@
 }
 
 .cancelReservationButton{
+	border-radius: 25px;
+    border: 2px solid #73AD21;
 	width:200px;
 	height:30px;
-	background-color:green;
+	background-color:#222222;
 }
 
 .extendReservationButton{
@@ -37,7 +39,9 @@
 }
 
 .reservationItem{
-	background-color:grey;
+	border-radius: 25px;
+    border: 2px solid #73AD21;
+	color: #ffffff;
 	padding:10px;
 	margin-top:25px;
 	display:inline-block;
