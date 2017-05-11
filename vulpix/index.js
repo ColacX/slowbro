@@ -368,7 +368,7 @@ $(document).ready(function(){
 	showLoading();
 	getReservationId();
 	updateTime();
-	updateReservationView(mockdata.reservations);
+	//updateReservationView(mockdata.reservations);
 	
 	fetchToken()
 	.then(fetchResourceData)
