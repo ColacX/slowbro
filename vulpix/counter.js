@@ -7,6 +7,7 @@ var resourceId = null;
 var videoId = null;
 var username = "tablet";
 var password = "tab1234!";
+var timerseconds = "900" ;
 
 
 
@@ -15,6 +16,10 @@ function getURLParameter(name) {
 }
 
 videoId = getURLParameter('videoId');
+timerseconds = getURLParameter('timerseconds');
+if (timerseconds === null) {
+        timerseconds = "900";
+}
 
 function updateTime(){
 	var d = new Date();
