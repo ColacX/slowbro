@@ -139,6 +139,12 @@ input.bookingEndTime { width: 235px; }
 	width: 20%;
 }
 
+.centerContent{
+	display:flex;
+	justify-content:center;
+	align-items:center;
+}
+
 .modalContainer{
 	width: 100vw;
 	height: 100vh;
@@ -147,15 +153,12 @@ input.bookingEndTime { width: 235px; }
 	top:0px;
 	left:0px;
 	text-align:center;
-	display: none;
 }
 
 .modalContainer .innerContainer{
 	background-color:#efefef;
 	display: inline-block;
 	padding: 20px;
-	height: 350px;
-	width: 700px;
 	border-radius: 12px;
 }
 
@@ -215,11 +218,6 @@ input.bookingEndTime { width: 235px; }
 	padding:10px;
 	width:100vw;
 	background-color:black;
-}
-
-.innerContainer{
-	position: relative;
-	top: 30%;
 }
 
 #videoBackground{

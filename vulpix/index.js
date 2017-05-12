@@ -378,6 +378,13 @@ function setHandlers(){
 }
 
 $(document).ready(function(){
+	$("#confirmWindow").hide();
+	$("#phonenumberWindow").hide();
+	$("#addReservationWindow").hide();
+	$("#passWindow").hide();
+	$("#failWindow").hide();
+	$("#loadWindow").hide();
+	
 	showLoading();
 	getReservationId();
 	updateTime();
