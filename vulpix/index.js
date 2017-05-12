@@ -380,7 +380,7 @@ $(document).ready(function(){
 	getReservationId();
 	updateTime();
 	//mock data below 
-	//updateReservationView(mockdata.reservations);
+	updateReservationView(mockdata.reservations);
 	
 	fetchToken()
 	.then(fetchResourceData)
