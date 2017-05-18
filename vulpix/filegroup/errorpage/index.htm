@@ -1,0 +1,49 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+	<title>Offline</title>
+	
+	<style>
+	*{
+		box-sizing: border-box;
+		padding: 0px;
+		margin: 0px;
+	}
+	
+	.container{
+		display:flex;
+		justify-content:center;
+		align-items:center;
+		background-color:black;
+		color:white;
+		width:100vw;
+		height:100vh;
+		font-family:cursive;
+		font-size:100px;
+	}
+	</style>
+	
+	<script>
+	
+	//reload kiosk home page
+	function loadHomePage(){
+		Android.loadHomePage();
+	}
+	
+	setInterval(function(){
+		loadHomePage();
+	}, 10 * 1000);
+	
+	</script>
+	
+</head>
+<body>
+
+<div class="container">
+	<span>Offline</span>
+</div>
+
+</body>
+</html>
