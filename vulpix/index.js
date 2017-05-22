@@ -384,6 +384,19 @@ function setHandlers(){
 	$("#imageLogo").on("click", runHarlemShake);
 }
 
+function repeatFetchInitData(){
+	return fetchToken()
+	.then(fetchResourceData)
+	.then(fetchReservationsData)
+	.fail(repeatFetchInitData);
+}
+
+function repeatFetchReservationData(){
+	return fetchToken()
+	.then(fetchReservationsData())
+	.fail(repeatFetchReservationData);
+}
+
 $(document).ready(function(){
 	$("#confirmWindow").hide();
 	$("#phonenumberWindow").hide();
@@ -401,9 +414,7 @@ $(document).ready(function(){
 		updateReservationView(mockdata.reservations);
 	}
 	
-	fetchToken()
-	.then(fetchResourceData)
-	.then(fetchReservationsData)
+	repeatFetchInitData()
 	.always(hideLoading);
 	
 	setInterval(function(){
@@ -412,7 +423,7 @@ $(document).ready(function(){
 		
 		if(stateStack.length == 0){
 			fetchReservationsData()
-			.fail(fetchToken);
+			.fail(repeatFetchReservationData);
 		}
 	}, 1000 * 60);
 	
