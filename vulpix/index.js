@@ -1,4 +1,4 @@
-console.log("version datetime: Mon May 22 2017 10:27:39 GMT+0200 (W. Europe Daylight Time)");
+console.log("version datetime: Mon May 22 2017 10:34:46 GMT+0200 (W. Europe Daylight Time)");
 	
 var locale = "SV-sv";
 var sessionToken = null;
@@ -388,6 +388,7 @@ function repeatFetchInitData(){
 	return fetchToken()
 	.then(fetchResourceData)
 	.then(fetchReservationsData)
+	.then(hideLoading)
 	.fail(repeatFetchInitData);
 }
 
@@ -405,7 +406,6 @@ $(document).ready(function(){
 	$("#failWindow").hide();
 	$("#loadWindow").hide();
 	
-	showLoading();
 	getResourceId();
 	updateTime();
 	
@@ -414,8 +414,8 @@ $(document).ready(function(){
 		updateReservationView(mockdata.reservations);
 	}
 	
-	repeatFetchInitData()
-	.then(hideLoading);
+	showLoading();
+	repeatFetchInitData();
 	
 	setInterval(function(){
 		updateTime();
