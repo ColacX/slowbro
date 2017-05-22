@@ -177,8 +177,11 @@ $(document).ready(function(){
 	.always(hideLoading);
 	
 	setInterval(function(){
-		updateTime();
 		checkVideo();
+	}, 1000);
+	
+	setInterval(function(){
+		updateTime();
 		
 		fetchReservationsData()
 		.fail(fetchToken);

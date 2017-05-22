@@ -418,8 +418,11 @@ $(document).ready(function(){
 	repeatFetchInitData();
 	
 	setInterval(function(){
-		updateTime();
 		checkVideo();
+	}, 1000);
+	
+	setInterval(function(){
+		updateTime();
 		
 		if(stateStack.length == 0){
 			fetchReservationsData()
