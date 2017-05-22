@@ -1,4 +1,4 @@
-console.log("version datetime: Wed May 10 2017 16:36:44 GMT+0200 (W. Europe Summer Time)");
+console.log("version datetime: Mon May 22 2017 10:27:39 GMT+0200 (W. Europe Daylight Time)");
 	
 var locale = "SV-sv";
 var sessionToken = null;
@@ -139,7 +139,7 @@ function fetchReservationsData(){
 	});
 }
 
-function getReservationId(){
+function getResourceId(){
 	var array = window.location.search.substring(1).split("&");
 	var argMap = {};
 	
@@ -406,7 +406,7 @@ $(document).ready(function(){
 	$("#loadWindow").hide();
 	
 	showLoading();
-	getReservationId();
+	getResourceId();
 	updateTime();
 	
 	if(window.location.protocol == "file:"){
@@ -415,7 +415,7 @@ $(document).ready(function(){
 	}
 	
 	repeatFetchInitData()
-	.always(hideLoading);
+	.then(hideLoading);
 	
 	setInterval(function(){
 		updateTime();
