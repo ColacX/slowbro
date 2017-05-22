@@ -178,7 +178,7 @@ $(document).ready(function(){
 	
 	setInterval(function(){
 		updateTime();
-//		checkVideo();
+		checkVideo();
 		
 		fetchReservationsData()
 		.fail(fetchToken);
