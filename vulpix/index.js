@@ -465,19 +465,23 @@ function repeatInit(){
 	.then(fetchToken)
 	.then(fetchResourceData)
 	.then(fetchReservationsData)
-	.then(function(){
-		startIntervals();
-		setHandlers();
-		hideLoading();
-	})
-	.catch(setTimeout(repeatInit, 10 * 1000));
+	.then(startIntervals)
+	.then(setHandlers)
+	.then(hideLoading)
+	.catch(function(e){
+		console.error(e);
+		setTimeout(repeatInit, 10 * 1000)
+	});
 }
 
 function repeatFetchReservationData(){
 	console.log("repeatFetchReservationData");
 	return fetchToken()
 	.then(fetchReservationsData)
-	.fail(setTimeout(repeatFetchReservationData, 10 * 1000));
+	.fail(function(e){
+		console.error(e);
+		setTimeout(repeatFetchReservationData, 10 * 1000);
+	});
 }
 
 $(document).ready(function(){
