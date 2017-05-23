@@ -94,7 +94,7 @@ function transformIn(){
 function fetchToken(){
 	return $.ajax({
 		method: "POST",
-		url: "http://slowbro.azurewebsites.net/Web/Services/index.php/Authentication/Authenticate",
+		url: "/Web/Services/index.php/Authentication/Authenticate",
 		cache: false,
 		dataType: "json",
 		contentType: "application/json; charset=utf-8",
@@ -113,7 +113,7 @@ function fetchToken(){
 function fetchResourceData(){
 	return $.ajax({
 		method: "GET",
-		url: "http://slowbro.azurewebsites.net/Web/Services/index.php/Resources/" + resourceId,
+		url: "/Web/Services/index.php/Resources/" + resourceId,
 		cache: false,
 		headers: {
 			"X-Booked-SessionToken": sessionToken,
@@ -127,7 +127,7 @@ function fetchResourceData(){
 function fetchReservationsData(){
 	return $.ajax({
 		method: "GET",
-		url: "http://slowbro.azurewebsites.net/Web/Services/index.php/Reservations/",
+		url: "/Web/Services/index.php/Reservations/",
 		dataType: "json",
 		data: {
 			resourceId: resourceId
