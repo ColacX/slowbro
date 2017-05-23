@@ -1,4 +1,4 @@
-console.log("version datetime: Tue May 23 2017 13:26:45 GMT+0200 (W. Europe Daylight Time)");
+console.log("version datetime: Tue May 23 2017 13:29:45 GMT+0200 (W. Europe Daylight Time)");
 	
 var locale = "SV-sv";
 var sessionToken = null;
@@ -460,22 +460,22 @@ function setHandlers(){
 
 function repeatInit(){
 	console.log("repeatInit");
-	return fetchToken()
+	return registerServiceWorker
+	.then(registerPushService)
+	.then(fetchToken)
 	.then(fetchResourceData)
 	.then(fetchReservationsData)
-	.then(hideLoading)
-	.then(registerServiceWorker)
-	.then(registerPushService)
 	.then(startIntervals)
 	.then(setHandlers)
-	.fail(setTimeout(repeatInit, 1000));
+	.then(hideLoading)
+	.fail(setTimeout(repeatInit, 10 * 1000));
 }
 
 function repeatFetchReservationData(){
 	console.log("repeatFetchReservationData");
 	return fetchToken()
 	.then(fetchReservationsData)
-	.fail(setTimeout(repeatFetchReservationData, 1000));
+	.fail(setTimeout(repeatFetchReservationData, 10 * 1000));
 }
 
 $(document).ready(function(){
