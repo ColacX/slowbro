@@ -430,8 +430,9 @@ function subscribePushService(){
 			}
         },
         message: function(data){
-			if(data.message == "reservation_updated"){
-				console.log("reservation_updated");
+			if(data.message == "update"){
+				console.log("update");
+				
 				fetchReservationsData()
 				.fail(repeatFetchReservationData);
 			}
@@ -459,7 +460,7 @@ function publishPushService(){
 	
 	pubnub.publish({
 		channel: pushServiceChannel,
-		message: "reservation_updated"
+		message: "update"
 	},
 	function(status, response) {
 		console.log(status, response);
