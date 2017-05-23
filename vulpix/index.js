@@ -7,6 +7,9 @@ var resourceId = null;
 var username = "tablet";
 var password = "tab1234!";
 var stateStack = [];
+var pushServiceSubscriptionKey = "demo";
+var pushServicePublishKey = "demo";
+var pushServiceChannel = "hello_world";
 
 function updateTime(){
 	var d = new Date();
@@ -409,6 +412,54 @@ function setHandlers(){
 	$("#imageLogo").on("click", runHarlemShake);
 }
 
+function subscribePushService(){
+	var pubnub = new PubNub({
+		subscribeKey : pushServiceSubscriptionKey
+    });
+	
+	pubnub.addListener({
+        status: function(statusEvent){
+			console.log("status", statusEvent);
+        },
+        message: function(data){
+			console.log(data);
+			
+			if(data.message == "resource_updated"){
+				console.log("resource_updated");
+			}
+			else if(data.message == "reservation_updated"){
+				console.log("reservation_updated");
+			}
+			else{
+				console.error("unrecognized message", data);
+			}
+        },
+        presence: function(presenceEvent){
+			console.log("presence");
+        }
+    });
+	
+	console.log("Subscribing..");
+	pubnub.subscribe({
+		channels:[pushServiceChannel] 
+	});
+}
+
+function publishPushService(){
+	var pubnub = new PubNub({
+		publishKey: pushServicePublishKey,
+		subscribeKey : pushServiceSubscriptionKey
+    });
+	
+	pubnub.publish({
+		channel: pushServiceChannel,
+		message: "testing testing"
+	},
+	function(status, response) {
+		console.log(status, response);
+	});
+}
+
 function repeatInit(){
 	return fetchToken()
 	.then(fetchResourceData)
@@ -418,7 +469,7 @@ function repeatInit(){
 	.then(hideLoading)
 	.catch(function(e){
 		console.error(e);
-		setTimeout(repeatInit, 10 * 1000)
+		setTimeout(repeatInit, 10 * 1000);
 	});
 }
 
@@ -442,6 +493,7 @@ $(document).ready(function(){
 	
 	getResourceId();
 	updateTime();
+	subscribePushService();
 	
 	if(window.location.protocol == "file:"){
 		//mock data below
