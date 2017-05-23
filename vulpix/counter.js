@@ -183,11 +183,11 @@ $(document).ready(function(){
 	setInterval(function(){
 		updateTime();
 		
-		fetchReservationsData()
-		.fail(fetchToken);
+		// fetchReservationsData()
+		// .fail(fetchToken);
 	}, 1000 * 60);
 	
-	setHandlers();
+	//setHandlers();
 });
 
 // Timer function for 30 minute room
