@@ -1,4 +1,4 @@
-console.log("version datetime: Tue May 23 2017 15:26:35 GMT+0200 (W. Europe Daylight Time)");
+console.log("version datetime: Tue May 23 2017 15:52:48 GMT+0200 (W. Europe Daylight Time)");
 	
 var locale = "SV-sv";
 var sessionToken = null;
@@ -9,7 +9,7 @@ var password = "tab1234!";
 var stateStack = [];
 var pushServiceSubscriptionKey = "sub-c-8f44a3e2-3fb9-11e7-b730-0619f8945a4f";
 var pushServicePublishKey = "pub-c-dc18fd78-1d30-45d2-bba8-40f6ab48083c";
-var pushServiceChannel = "channel_resource_id";
+var pushServiceChannel = null;
 
 function updateTime(){
 	var d = new Date();
@@ -152,6 +152,7 @@ function getResourceId(){
 	}
 	
 	resourceId = argMap["resourceId"];
+	pushServiceChannel = "channel_resource_" + resourceId;
 }
 
 function promptConfirm(){
@@ -386,10 +387,10 @@ function startIntervals()
 	setInterval(function(){
 		updateTime();
 		
-		if(stateStack.length == 0){
-			fetchReservationsData()
-			.fail(repeatFetchReservationData);
-		}
+		// if(stateStack.length == 0){
+			// fetchReservationsData()
+			// .fail(repeatFetchReservationData);
+		// }
 	}, 1000 * 60);
 }
 
@@ -413,16 +414,22 @@ function setHandlers(){
 }
 
 function subscribePushService(){
+	var d = $.Deferred();
 	var pubnub = new PubNub({
 		subscribeKey : pushServiceSubscriptionKey
     });
 	
 	pubnub.addListener({
-        status: function(statusEvent){
-			console.log("status", statusEvent);
+        status: function(data){
+			console.log("status", data);
+			if(data.error){
+				d.reject(data);
+			}
+			else{
+				d.resolve();
+			}
         },
         message: function(data){
-			console.log(data);
 			if(data.message == "reservation_updated"){
 				console.log("reservation_updated");
 				fetchReservationsData()
@@ -432,15 +439,16 @@ function subscribePushService(){
 				console.error("unrecognized message", data);
 			}
         },
-        presence: function(presenceEvent){
-			console.log("presence");
-        }
-    });
+		presence: function(data){
+			console.log("presence", data);
+		}
+	});
 	
-	console.log("Subscribing..");
 	pubnub.subscribe({
 		channels:[pushServiceChannel] 
 	});
+	
+	return d.promise();
 }
 
 function publishPushService(){
@@ -459,7 +467,8 @@ function publishPushService(){
 }
 
 function repeatInit(){
-	return fetchToken()
+	return subscribePushService()
+	.then(fetchToken)
 	.then(fetchResourceData)
 	.then(fetchReservationsData)
 	.then(startIntervals)
@@ -491,7 +500,6 @@ $(document).ready(function(){
 	
 	getResourceId();
 	updateTime();
-	subscribePushService();
 	
 	if(window.location.protocol == "file:"){
 		//mock data below
