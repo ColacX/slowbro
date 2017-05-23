@@ -73,7 +73,7 @@ function fetchReservationsData(){
 			"X-Booked-UserId": sessionUserId
 		}
 	}).done(function(r) {
-		updateReservationView(r.reservations);
+		//updateReservationView(r.reservations);
 	});
 }
 
@@ -173,7 +173,7 @@ $(document).ready(function(){
 	
 	fetchToken()
 	.then(fetchResourceData)
-	.then(fetchReservationsData)
+	//.then(fetchReservationsData)
 	.always(hideLoading);
 	
 	setInterval(function(){
