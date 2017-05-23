@@ -423,6 +423,22 @@ function registerPushService(){
 function unregisterPushService(){
 }
 
+function startIntervals()
+{
+	setInterval(function(){
+		checkVideo();
+	}, 1000);
+	
+	setInterval(function(){
+		updateTime();
+		
+		if(stateStack.length == 0){
+			fetchReservationsData()
+			.fail(repeatFetchReservationData);
+		}
+	}, 1000 * 60);
+}
+
 function setHandlers(){
 	$(".addReservationButton").off("click").on("click", function(){
 		/*
@@ -442,17 +458,23 @@ function setHandlers(){
 	$("#imageLogo").on("click", runHarlemShake);
 }
 
-function repeatFetchInitData(){
+function repeatInit(){
+	console.log("repeatInit");
 	return fetchToken()
 	.then(fetchResourceData)
 	.then(fetchReservationsData)
 	.then(hideLoading)
-	.fail(setTimeout(repeatFetchInitData, 1000));
+	.then(registerServiceWorker)
+	.then(registerPushService)
+	.then(startIntervals)
+	.then(setHandlers)
+	.fail(setTimeout(repeatInit, 1000));
 }
 
 function repeatFetchReservationData(){
+	console.log("repeatFetchReservationData");
 	return fetchToken()
-	.then(fetchReservationsData())
+	.then(fetchReservationsData)
 	.fail(setTimeout(repeatFetchReservationData, 1000));
 }
 
@@ -473,22 +495,5 @@ $(document).ready(function(){
 	}
 	
 	showLoading();
-	repeatFetchInitData();
-	registerServiceWorker()
-	.then(registerPushService);
-	
-	setInterval(function(){
-		checkVideo();
-	}, 1000);
-	
-	setInterval(function(){
-		updateTime();
-		
-		if(stateStack.length == 0){
-			fetchReservationsData()
-			.fail(repeatFetchReservationData);
-		}
-	}, 1000 * 60);
-	
-	setHandlers();
+	repeatInit();
 });
