@@ -460,7 +460,7 @@ function setHandlers(){
 
 function repeatInit(){
 	console.log("repeatInit");
-	return registerServiceWorker
+	return registerServiceWorker()
 	.then(registerPushService)
 	.then(fetchToken)
 	.then(fetchResourceData)
@@ -468,7 +468,7 @@ function repeatInit(){
 	.then(startIntervals)
 	.then(setHandlers)
 	.then(hideLoading)
-	.fail(setTimeout(repeatInit, 10 * 1000));
+	.catch(setTimeout(repeatInit, 10 * 1000));
 }
 
 function repeatFetchReservationData(){
