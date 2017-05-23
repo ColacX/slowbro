@@ -7,9 +7,9 @@ var resourceId = null;
 var username = "tablet";
 var password = "tab1234!";
 var stateStack = [];
-var pushServiceSubscriptionKey = "demo";
-var pushServicePublishKey = "demo";
-var pushServiceChannel = "hello_world";
+var pushServiceSubscriptionKey = "sub-c-8f44a3e2-3fb9-11e7-b730-0619f8945a4f";
+var pushServicePublishKey = "pub-c-dc18fd78-1d30-45d2-bba8-40f6ab48083c";
+var pushServiceChannel = "channel_resource_id";
 
 function updateTime(){
 	var d = new Date();
@@ -423,12 +423,10 @@ function subscribePushService(){
         },
         message: function(data){
 			console.log(data);
-			
-			if(data.message == "resource_updated"){
-				console.log("resource_updated");
-			}
-			else if(data.message == "reservation_updated"){
+			if(data.message == "reservation_updated"){
 				console.log("reservation_updated");
+				fetchReservationsData()
+				.fail(repeatFetchReservationData);
 			}
 			else{
 				console.error("unrecognized message", data);
@@ -453,7 +451,7 @@ function publishPushService(){
 	
 	pubnub.publish({
 		channel: pushServiceChannel,
-		message: "testing testing"
+		message: "reservation_updated"
 	},
 	function(status, response) {
 		console.log(status, response);
