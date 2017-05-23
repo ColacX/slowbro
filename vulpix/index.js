@@ -6,6 +6,8 @@ var sessionUserId = null;
 var resourceId = null;
 var username = "tablet";
 var password = "tab1234!";
+var pushServicePublicKey = "BOgNlIommuYhTrYgld5WV6r3k2Z1kO0rzbfNgLoWDhDb-prQNln-aWUdHSAazgMlghTt-1ZB-ejKz4u57Pi1V9s";
+var swRegistration = null;
 var stateStack = [];
 
 function updateTime(){
@@ -365,6 +367,62 @@ function checkVideo(){
 	}
 }
 
+function urlB64ToUint8Array(base64String) {
+	var padding = '='.repeat((4 - base64String.length % 4) % 4);
+	var base64 = (base64String + padding)
+	.replace(/\-/g, '+')
+	.replace(/_/g, '/');
+
+	var rawData = window.atob(base64);
+	var outputArray = new Uint8Array(rawData.length);
+
+	for (let i = 0; i < rawData.length; ++i) {
+		outputArray[i] = rawData.charCodeAt(i);
+	}
+	
+	return outputArray;
+}
+
+function registerServiceWorker(){
+	if(!("serviceWorker" in navigator)) {
+		alert("Service worker is not supported");
+	}
+	
+	if(!("PushManager" in window)){
+		alert("Push is not supported");
+	}
+	
+	return navigator.serviceWorker.register("serviceWorker.js")
+	.then(function(swr) {
+		swRegistration = swr;
+		console.log("Service Worker is registered", swr);
+	})
+	.catch(function(e) {
+		console.error("Service Worker Error", e);
+	});
+}
+
+function unregisterServiceWorker(){
+}
+
+function registerPushService(){
+	return swRegistration.pushManager.subscribe({
+		userVisibleOnly: true,
+		applicationServerKey: urlB64ToUint8Array(pushServicePublicKey)
+	})
+	.then(function(subscription) {
+		console.log("Push subscription succeeded");
+		console.log(subscription);
+		console.dir(JSON.stringify(subscription));
+	})
+	.catch(function(e) {
+		console.error('Failed to subscribe to the push service', e);
+	});
+}
+
+function unregisterPushService(){
+}
+
 function setHandlers(){
 	$(".addReservationButton").off("click").on("click", function(){
 		/*
@@ -389,13 +447,13 @@ function repeatFetchInitData(){
 	.then(fetchResourceData)
 	.then(fetchReservationsData)
 	.then(hideLoading)
-	.fail(repeatFetchInitData);
+	.fail(setTimeout(repeatFetchInitData, 1000));
 }
 
 function repeatFetchReservationData(){
 	return fetchToken()
 	.then(fetchReservationsData())
-	.fail(repeatFetchReservationData);
+	.fail(setTimeout(repeatFetchReservationData, 1000));
 }
 
 $(document).ready(function(){
@@ -416,6 +474,8 @@ $(document).ready(function(){
 	
 	showLoading();
 	repeatFetchInitData();
+	registerServiceWorker()
+	.then(registerPushService);
 	
 	setInterval(function(){
 		checkVideo();
