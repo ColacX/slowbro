@@ -386,12 +386,14 @@ function startIntervals()
 	
 	setInterval(function(){
 		updateTime();
-		
-		// if(stateStack.length == 0){
-			// fetchReservationsData()
-			// .fail(repeatFetchReservationData);
-		// }
 	}, 1000 * 60);
+	
+	setInterval(function(){
+		if(stateStack.length == 0){
+			fetchReservationsData()
+			.fail(repeatFetchReservationData);
+		}
+	}, 1000 * 60 * 60);
 }
 
 function setHandlers(){
@@ -468,8 +470,7 @@ function publishPushService(){
 }
 
 function repeatInit(){
-	return subscribePushService()
-	.then(fetchToken)
+	return fetchToken()
 	.then(fetchResourceData)
 	.then(fetchReservationsData)
 	.then(startIntervals)
@@ -509,5 +510,6 @@ $(document).ready(function(){
 	else{
 		showLoading();
 		repeatInit();
+		subscribePushService();
 	}
 });
