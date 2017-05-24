@@ -20,6 +20,10 @@ along with Booked Scheduler.  If not, see <http://www.gnu.org/licenses/>.
 
 define('ROOT_DIR', '../');
 require_once(ROOT_DIR . 'Pages/HelpPage.php');
+require_once(ROOT_DIR . 'lib/Pubnub-3.8.3/autoloader.php');
+
+
+pushPublishUpdate('2') ;
 
 $page = new HelpPage();
 $page->PageLoad();

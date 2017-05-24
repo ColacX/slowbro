@@ -25,11 +25,16 @@ spl_autoload_register('pubnubAutoloader', true, true);
 
 use Pubnub\Pubnub;
 
-function publishUpdate($resourceId){
+function pushPublishUpdate($resourceId)
+{
 	$pushServiceSubscriptionKey = "sub-c-8f44a3e2-3fb9-11e7-b730-0619f8945a4f";
 	$pushServicePublishKey = "pub-c-dc18fd78-1d30-45d2-bba8-40f6ab48083c";
 	
-	$pushServiceChannel = 'channel_resource_' + $resourceId;
-	$pubnub = new Pubnub($pushServiceSubscriptionKey, $pushServicePublishKey);
-	pubnub->publish(pushServiceChannel, "update");
+	$pushServiceChannel = 'channel_resource_' . $resourceId;
+    $message = "update" ;
+    $pubnub = new Pubnub([
+        "subscribe_key" =>$pushServiceSubscriptionKey,
+        "publish_key" => $pushServicePublishKey
+    ]);
+    $result = $pubnub->publish($pushServiceChannel,$message) ;
 }
