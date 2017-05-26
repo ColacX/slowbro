@@ -4,6 +4,7 @@ var locale = "SV-sv";
 var sessionToken = null;
 var sessionUserId = null;
 var resourceId = null;
+var reservations = null;
 var username = "tablet";
 var password = "tab1234!";
 var stateStack = [];
@@ -24,6 +25,7 @@ function cancelReservation(reservationId){
 		deleteReservation(reservationId)
 		.then(showPass)
 		.then(fetchReservationsData)
+		.then(updateReservationView(reservations))
 		.fail(showFail)
 		.always(hideLoading);
 	});
@@ -34,6 +36,7 @@ function extendReservation(reservationId){
 }
 
 function updateReservationView(reservationItems){
+	console.log("updateReservationView");
 	var l = [];
 	
 	for(var i=0; i<reservationItems.length; i++){
@@ -66,10 +69,13 @@ function updateReservationView(reservationItems){
 		l.push("</div>");
 	}
 	
-	$("#reservationList").html(l.join("\n"));
+	var html = l.join("\n");
 	
-	setTimeout(transformOut, 0);
-	setTimeout(transformIn, 1000);
+	if(html != $("#reservationList").html()){
+		$("#reservationList").html(html);
+		setTimeout(transformOut, 0);
+		setTimeout(transformIn, 1000);
+	}
 }
 
 function transformOut(){
@@ -138,7 +144,7 @@ function fetchReservationsData(){
 			"X-Booked-UserId": sessionUserId
 		}
 	}).done(function(r) {
-		updateReservationView(r.reservations);
+		reservations = r.reservations;
 	});
 }
 
@@ -270,6 +276,7 @@ function showAddReservation(userId){
 		})
 		.then(showPass)
 		.then(fetchReservationsData)
+		.then(updateReservationView(reservations))
 		.fail(showFail)
 		.always(hideLoading);
 	});
@@ -386,6 +393,7 @@ function startIntervals()
 	
 	setInterval(function(){
 		updateTime();
+		updateReservationView(reservations);
 	}, 1000 * 60);
 	
 	setInterval(function(){
@@ -436,6 +444,7 @@ function subscribePushService(){
 				console.log("update");
 				
 				fetchReservationsData()
+				.then(updateReservationView(reservations))
 				.fail(repeatFetchReservationData);
 			}
 			else{
@@ -473,6 +482,7 @@ function repeatInit(){
 	return fetchToken()
 	.then(fetchResourceData)
 	.then(fetchReservationsData)
+	.then(updateReservationView(reservations))
 	.then(startIntervals)
 	.then(setHandlers)
 	.then(hideLoading)
