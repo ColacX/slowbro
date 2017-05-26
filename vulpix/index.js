@@ -5,6 +5,7 @@ var sessionToken = null;
 var sessionUserId = null;
 var resourceId = null;
 var reservationItems = null;
+var reservationHTML = null;
 var username = "tablet";
 var password = "tab1234!";
 var stateStack = [];
@@ -73,8 +74,9 @@ function updateReservationView(){
 	
 	var html = l.join("\n");
 	
-	if(html != $("#reservationList").html()){
-		$("#reservationList").html(html);
+	if(html != reservationHTML){
+		reservationHTML = html;
+		$("#reservationList").html(reservationHTML);
 		setTimeout(transformOut, 0);
 		setTimeout(transformIn, 1000);
 	}
