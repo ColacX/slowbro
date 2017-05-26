@@ -37,6 +37,8 @@ function extendReservation(reservationId){
 
 function updateReservationView(reservationItems){
 	console.log("updateReservationView");
+	if(!reservationItems) return;
+	
 	var l = [];
 	
 	for(var i=0; i<reservationItems.length; i++){
