@@ -4,7 +4,7 @@ var locale = "SV-sv";
 var sessionToken = null;
 var sessionUserId = null;
 var resourceId = null;
-var reservations = null;
+var reservationItems = null;
 var username = "tablet";
 var password = "tab1234!";
 var stateStack = [];
@@ -25,7 +25,7 @@ function cancelReservation(reservationId){
 		deleteReservation(reservationId)
 		.then(showPass)
 		.then(fetchReservationsData)
-		.then(updateReservationView(reservations))
+		.then(updateReservationView)
 		.fail(showFail)
 		.always(hideLoading);
 	});
@@ -35,7 +35,7 @@ function extendReservation(reservationId){
 	console.log("extendReservation");
 }
 
-function updateReservationView(reservationItems){
+function updateReservationView(){
 	console.log("updateReservationView");
 	if(!reservationItems) return;
 	
@@ -134,7 +134,7 @@ function fetchResourceData(){
 }
 
 function fetchReservationsData(){
-	console.log(fetchReservationsData);
+	console.log("fetchReservationsData");
 	return $.ajax({
 		method: "GET",
 		url: "/Web/Services/index.php/Reservations/",
@@ -147,7 +147,7 @@ function fetchReservationsData(){
 			"X-Booked-UserId": sessionUserId
 		}
 	}).then(function(r) {
-		reservations = r.reservations;
+		reservationItems = r.reservations;
 	});
 }
 
@@ -279,7 +279,7 @@ function showAddReservation(userId){
 		})
 		.then(showPass)
 		.then(fetchReservationsData)
-		.then(updateReservationView(reservations))
+		.then(updateReservationView)
 		.fail(showFail)
 		.always(hideLoading);
 	});
@@ -396,7 +396,7 @@ function startIntervals()
 	
 	setInterval(function(){
 		updateTime();
-		updateReservationView(reservations);
+		updateReservationView();
 	}, 1000 * 60);
 	
 	setInterval(function(){
@@ -447,7 +447,7 @@ function subscribePushService(){
 				console.log("update");
 				
 				fetchReservationsData()
-				.then(updateReservationView(reservations))
+				.then(updateReservationView)
 				.fail(repeatFetchReservationData);
 			}
 			else{
@@ -485,7 +485,7 @@ function repeatInit(){
 	return fetchToken()
 	.then(fetchResourceData)
 	.then(fetchReservationsData)
-	.then(updateReservationView(reservations))
+	.then(updateReservationView)
 	.then(startIntervals)
 	.then(setHandlers)
 	.then(hideLoading)
@@ -518,7 +518,8 @@ $(document).ready(function(){
 	
 	if(window.location.protocol == "file:"){
 		//mock data below
-		updateReservationView(mockdata.reservations);
+		reservationItems = mockdata.reservations;
+		updateReservationView();
 	}
 	else{
 		showLoading();
