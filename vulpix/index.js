@@ -111,7 +111,7 @@ function fetchToken(){
 			username: username,
 			password: password
 		})
-	}).done(function(r) {
+	}).then(function(r) {
 		if(r.isAuthenticated){
 			sessionToken = r.sessionToken;
 			sessionUserId = r.userId;
@@ -128,12 +128,13 @@ function fetchResourceData(){
 			"X-Booked-SessionToken": sessionToken,
 			"X-Booked-UserId": sessionUserId
 		}
-	}).done(function(r) {
+	}).then(function(r) {
 		$("#roomName").text(r.name);
 	});
 }
 
 function fetchReservationsData(){
+	console.log(fetchReservationsData);
 	return $.ajax({
 		method: "GET",
 		url: "/Web/Services/index.php/Reservations/",
@@ -145,7 +146,7 @@ function fetchReservationsData(){
 			"X-Booked-SessionToken": sessionToken,
 			"X-Booked-UserId": sessionUserId
 		}
-	}).done(function(r) {
+	}).then(function(r) {
 		reservations = r.reservations;
 	});
 }
