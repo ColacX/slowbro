@@ -1,2 +1,5 @@
 /config/config.live.php
 /config/config.local.php
+/config/config.php
+/.vscode/
+/tpl_c/
