@@ -127,16 +127,7 @@
 				var hour;
 				var ampm;
 				var currentdate = new Date();
-				if(currentdate.getHours() <= 12)
-				{
-					hour = currentdate.getHours();
-					ampm = "AM";
-				}
-				else
-				{
-					hour = currentdate.getHours()-12;
-					ampm = "PM";
-				}
+				hour = currentdate.getHours();
 				if(currentdate.getMinutes() == 0)
 				{
 					var minutes = "00";
@@ -150,8 +141,7 @@
 					var minutes = currentdate.getMinutes();
 				}
 				var dt = hour + ":"
-                + minutes + " "
-				+ ampm;
+                + minutes;
 				document.getElementById("demo2").innerHTML = dt;
 			}
 		</script>
