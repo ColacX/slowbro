@@ -513,7 +513,7 @@ $(document).ready(function(){
 	$("#passWindow").hide();
 	$("#failWindow").hide();
 	$("#loadWindow").hide();
-	document.querySelector('video').playbackRate = 0.25;
+	//document.querySelector('video').playbackRate = 0.25;
 	
 	getResourceId();
 	updateTime();
