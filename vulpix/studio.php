@@ -200,7 +200,7 @@
 		<div id="jquery-script-menu">
 			<div class="jquery-script-center">
 	  			<div class="container container--m">
-    				<div class="text-container text-container--with-plugin"><?php // echo $tweet_text ; ?></div>
+    				<div class="text-container text-container--with-plugin"><?php  echo $tweet_text ; ?></div>
   				</div>
 			</div>
 		</div>
