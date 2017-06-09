@@ -170,7 +170,7 @@
         		margin: 1.5em auto 0 auto;
       		}
       		.container--m {
-        		width: 880px;
+        		width: 900px;
 				color: #FFFFFF;
 				margin-top:250px; 
 				font-size: 25px; 
@@ -200,7 +200,7 @@
 		<div id="jquery-script-menu">
 			<div class="jquery-script-center">
 	  			<div class="container container--m">
-    				<div class="text-container text-container--with-plugin">anotehr here we gotMama always said life was like a box of chocolates. You never know what you’re gonna get.</div>
+    				<div class="text-container text-container--with-plugin">This is just some really long text to make sure that everythign is on the screen as we expect and the scrolling works right.<?php // echo $tweet_text ; ?></div>
   				</div>
 			</div>
 		</div>
