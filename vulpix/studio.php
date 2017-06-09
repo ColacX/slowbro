@@ -12,9 +12,11 @@
 		<!-- include flatWeatherPlugin.css -->
 		<link href="weather/css/flatWeatherPlugin.css" rel="stylesheet">
 		<!-- include a copy of jquery (if you haven't already) -->
-		<script src="weather/js/jquery-2.1.1.min.js"></script>
+		<script src="http://code.jquery.com/jquery-3.1.1.min.js"></script>
 		<!-- include flatWeatherPlugin.js -->
 		<script src="weather/js/jquery.flatWeatherPlugin.min.js"></script>  
+		<!-- include autoScroll plugin -->
+		<script src="twitter/jquery.autoScrollTextTape.min.js"></script>  
 
 		<script type="text/javascript">
 		function startWeather() {
@@ -22,11 +24,12 @@
 
 			//Setup the plugin, see readme for more examples
 			var example = $("#example").flatWeatherPlugin({
-			location: "Stockholm,Stockholm",
+			location: "Stockholm,Sweden",
 			country: "Sweden",
 			api: "yahoo",
 			displayCityNameOnly : false,
-			view : "today",
+			//view : "today",
+			view : "simple",
 			});
 		});
 		}
@@ -146,21 +149,60 @@
                 + minutes;
 				document.getElementById("demo2").innerHTML = dt;
 			}
+
 		</script>
+		 <script type="text/javascript">
+		 $(document).ready(function(){
+    		$('.text-container--with-plugin').autoTextTape();
+		});
+    
+  		</script>
+		<!-- weather widget style only -->
+		 <style>
+			 .java-script-menu {
+				 position:absolute; 
+
+			 }
+      		.container {
+        		position: relative;
+        		padding: 4px 10px;
+        		border: 0px solid #dadada;
+        		margin: 1.5em auto 0 auto;
+      		}
+      		.container--m {
+        		width: 880px;
+				color: #FFFFFF;
+				margin-top:250px; 
+				font-size: 25px; 
+				font-weight: bold;
+      		}
+      
+      		.text-container {
+        		text-align: center;
+      		}
+      		h1 { margin:150px auto 30px auto; text-align:center;}
+    	</style>
+
 	</head>
 	<body onload="startPage(); setInterval('startPage()', 1000 )">
 		<div style="width:912px; height:300px;align-content:center; align-self:center; align-items:center;">
-			<img src="weather/img/symbio_logo.svg" alt="symbio" style="margin-top:70px;width:650px;height:150px; margin-left: 17%; ">
+			<img src="weather/img/symbio_logo.svg" alt="symbio" style="margin-top:70px;width:650px;height:150px; margin-left: 14%; ">
 		</div>
     	<div style="height:0px;margin-left:400px; font-style: normal; font-weight: 500; align-content:center; align-items:center; align-self:center;">
-			<p id="demo" style="width: 600px; color: #FFFFFF; font-size: 50px; align-content:center; align-self:center; align-items:center;"></p>
-            <p id="demo2" style="width: 600px; color: #FFFFFF; font-size: 50px; align-content:center; align-self:center; align-items:center;"></p>
-			<p><?php echo $tweet_text ; ?>	</p>
+			<p id="demo" style="width: 400px; color: #FFFFFF; font-size: 25px; font-weight: bold; align-content:center; align-self:center; align-items:center;"></p>
+            <p id="demo2" style="width: 400px; color: #FFFFFF; font-size: 70px; align-content:center; align-self:center; align-items:center; margin-top:4px;"></p>
     	</div>
 	
 		<!-- Weatehr widget -->
-		<div style="position:absolute; margin-top:0px; margin-left:40px;" id="example"></div>
+		<div style="position:absolute; margin-top:-10px; margin-left:100px;" id="example"></div>
 
-
+		<!-- Twitter widget -->
+		<div id="jquery-script-menu">
+			<div class="jquery-script-center">
+	  			<div class="container container--m">
+    				<div class="text-container text-container--with-plugin">anotehr here we gotMama always said life was like a box of chocolates. You never know what you’re gonna get.</div>
+  				</div>
+			</div>
+		</div>
 </body>
 </html>
