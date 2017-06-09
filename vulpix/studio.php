@@ -200,7 +200,7 @@
 		<div id="jquery-script-menu">
 			<div class="jquery-script-center">
 	  			<div class="container container--m">
-    				<div class="text-container text-container--with-plugin">This is just some really long text to make sure that everythign is on the screen as we expect and the scrolling works right.<?php // echo $tweet_text ; ?></div>
+    				<div class="text-container text-container--with-plugin"><?php // echo $tweet_text ; ?></div>
   				</div>
 			</div>
 		</div>
