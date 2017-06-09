@@ -170,7 +170,7 @@
         		margin: 1.5em auto 0 auto;
       		}
       		.container--m {
-        		width: 900px;
+        		width: 912px;
 				color: #FFFFFF;
 				margin-top:250px; 
 				font-size: 25px; 
