@@ -41,5 +41,5 @@ echo '</pre>';
 */
 //print_r ($string) ;
 $tweet_text = $string[0]['text'] ;
-
+echo $tweet_text ;
 ?>

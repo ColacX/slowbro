@@ -55,8 +55,50 @@
 			function startPage() {
 				startTime();
 				startWeather();
+				loadTweet();
 			}
 		</script>
+		<script>
+			function loadTweet(){
+      			//$('#twitter_text').load('twitter/tweet.php');
+				  // on monday make sure we can write the text from tweet to the this variable!
+				  //var twitter_text = ('twitter/tweet.php');
+
+				var twitter_text = getTweet();
+				function getTweet(){
+					$.ajax({
+						type: 'GET',
+						url: "twitter/tweet.php",
+						async: false,
+						success: function (response) { 
+							twitter_text = response ;
+							tweet_change(twitter_text) ;
+						},
+					}).responseText;
+						
+				
+					//$('#twitter_text').text('This should be a really ong message to see fi the scrolling will start working when we update the text, if it does not we cant use a span');
+					//alert(twitter_text);
+					//alert(twitter_text) ;
+				//	$('#twitter_text').text(twitter_text);
+				//	$('.text-container--with-plugin').autoTextTape();
+				
+				//$('.text-container--with-plugin').autoTextTape();
+				}
+
+				//
+				
+ 			}
+			 function tweet_change(twitter_text){					
+					var tweet_text = twitter_text ;
+					$('#twitter_text').text(tweet_text).replace;
+					console.log(tweet_text);
+					$('.text-container--with-plugin').autoTextTape();
+
+	
+				}
+		</script>
+
         <script>
 			function startTime() {
 				var day;
@@ -155,7 +197,6 @@
 		 $(document).ready(function(){
     		$('.text-container--with-plugin').autoTextTape();
 		});
-    
   		</script>
 		<!-- weather widget style only -->
 		 <style>
@@ -184,7 +225,7 @@
     	</style>
 
 	</head>
-	<body onload="startPage(); setInterval('startPage()', 1000 )">
+	<body onload="startPage(); setInterval('startPage()', 5000 )">
 		<div style="width:912px; height:300px;align-content:center; align-self:center; align-items:center;">
 			<img src="weather/img/symbio_logo.svg" alt="symbio" style="margin-top:70px;width:650px;height:150px; margin-left: 14%; ">
 		</div>
@@ -200,7 +241,7 @@
 		<div id="jquery-script-menu">
 			<div class="jquery-script-center">
 	  			<div class="container container--m">
-    				<div class="text-container text-container--with-plugin"><?php  echo $tweet_text ; ?></div>
+    				<div class="text-container text-container--with-plugin"><span id="twitter_text">test4</span><?php // echo $tweet_text ; ?></div>
   				</div>
 			</div>
 		</div>
